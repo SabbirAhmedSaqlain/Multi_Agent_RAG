@@ -1,0 +1,99 @@
+Climate Change: Science, Impacts, and Solutions
+
+THE SCIENCE OF CLIMATE CHANGE
+
+Climate change refers to long-term shifts in global temperatures, precipitation, wind patterns, and other climate system components. The current period of rapid climate change is primarily caused by human activities, particularly the burning of fossil fuels and land use changes.
+
+The Greenhouse Effect: Solar radiation passes through the atmosphere and warms Earth's surface. The surface radiates heat upward, but greenhouse gases (GHGs) in the atmosphere absorb some of this heat and re-radiate it back toward Earth. This "greenhouse effect" is natural and necessary — without it, Earth would be about 33°C cooler and largely uninhabitable. The problem is the enhancement of this effect by human-added GHGs.
+
+Key Greenhouse Gases:
+- Carbon dioxide (CO₂): The most important anthropogenic GHG. Atmospheric CO₂ has risen from 280 ppm (pre-industrial) to over 420 ppm today — the highest level in at least 3 million years. CO₂ persists in the atmosphere for centuries to millennia.
+- Methane (CH₄): 86 times more potent than CO₂ over 20 years. Sources include livestock, rice paddies, landfills, and natural gas leaks. Atmospheric methane has more than doubled since pre-industrial times.
+- Nitrous Oxide (N₂O): 310 times more potent than CO₂. Primarily from agricultural fertilizers.
+- Fluorinated gases: Synthetic gases used in refrigeration and manufacturing with warming potentials thousands of times that of CO₂.
+
+The Carbon Cycle: Carbon cycles between the atmosphere, oceans, land, and living organisms. Human activities release approximately 40 billion tonnes of CO₂ per year — roughly 100 times natural volcanic emissions. Only about half remains in the atmosphere; oceans and land absorb the rest, but this capacity has limits.
+
+EVIDENCE FOR CLIMATE CHANGE
+
+Temperature Records: Global average surface temperature has risen approximately 1.2°C since the late 19th century. The last decade (2011–2020) was the hottest on record. Every month since February 1985 has been warmer than the 20th-century average.
+
+Sea Level Rise: Global mean sea level has risen about 20 cm since 1900, with the rate accelerating. Thermal expansion (water expanding as it warms) accounts for about 40%; glacier and ice sheet melt account for the rest. Sea level is projected to rise 0.3–1.0 m by 2100 under various scenarios.
+
+Arctic Amplification: The Arctic is warming 3-4 times faster than the global average due to feedback loops. As sea ice melts, darker ocean water absorbs more heat (ice-albedo feedback). Arctic sea ice extent has declined by about 13% per decade since satellite observations began in 1979.
+
+Glacier Retreat: Glaciers worldwide are losing mass at an accelerating rate. Tropical glaciers (Kilimanjaro, Andes) have lost 50-80% of their mass in the last century. The Greenland and Antarctic ice sheets are losing over 400 billion tonnes per year.
+
+Ocean Changes: Oceans have absorbed over 90% of the excess heat in the climate system. Ocean heat content is at record levels. Additionally, oceans absorb CO₂, becoming more acidic (ocean pH has decreased by 0.1 units since pre-industrial times, a 26% increase in acidity). Coral bleaching events, driven by warming, have affected over 75% of reefs globally.
+
+Extreme Weather: Climate change increases the intensity (though not necessarily frequency) of many extreme events. Attribution science can now quantify climate change's contribution to specific events. The 2021 Pacific Northwest heat dome (temperatures reaching 49.6°C in Canada) was made virtually impossible without climate change.
+
+CLIMATE PROJECTIONS
+
+The Intergovernmental Panel on Climate Change (IPCC), the authoritative international body of climate scientists, publishes comprehensive assessment reports every 5-7 years. The Sixth Assessment Report (AR6, 2021-2022) provides the most up-to-date projections.
+
+Emission Scenarios: The IPCC uses Shared Socioeconomic Pathways (SSPs) to model future scenarios:
+- SSP1-1.9: Aggressive mitigation, warming limited to ~1.5°C by 2100
+- SSP2-4.5: Intermediate emissions, warming of ~2.7°C by 2100
+- SSP5-8.5: High emissions (business as usual), warming of ~4.4°C by 2100
+
+Tipping Points: The climate system contains potential tipping points — thresholds beyond which self-reinforcing feedbacks drive irreversible changes:
+- West Antarctic Ice Sheet collapse (could add 3-5m of sea level rise)
+- Greenland ice sheet disintegration (7m of sea level rise potential)
+- Amazon dieback (releasing massive stored carbon)
+- Permafrost thaw (releasing methane stored for millennia)
+- Atlantic Meridional Overturning Circulation (AMOC) slowdown
+
+Research suggests some tipping points may cascade — triggering others at lower temperatures than previously thought.
+
+IMPACTS BY REGION
+
+Small Island States: Existential threat from sea level rise. Nations like Tuvalu, Maldives, and Kiribati face complete inundation. Some are planning to relocate entire populations.
+
+Tropical Regions: Increasing heat stress, with some regions approaching the limits of human physiological tolerance (wet-bulb temperature of 35°C). Agricultural disruption as crop yield-optimal temperature ranges shift poleward.
+
+Arctic Communities: Indigenous communities face destruction of traditional ways of life as permafrost thaws, sea ice disappears, and weather patterns change dramatically.
+
+Coastal Cities: Over 600 million people live within 10m elevation of sea level. Major cities including Shanghai, Mumbai, Miami, New York, and Amsterdam face increasing flood risk.
+
+Mediterranean and California: Fire weather, drought, and heat stress are increasing. The 2020 California fire season burned over 4 million acres, setting a new record.
+
+MITIGATION STRATEGIES
+
+Rapid Decarbonization: The primary solution requires eliminating greenhouse gas emissions from energy, transportation, industry, and agriculture. The 1.5°C pathway requires halving global emissions by 2030 and reaching net zero by 2050.
+
+Renewable Energy Transition: Solar and wind power costs have plummeted 90% and 70% respectively over the last decade, making them the cheapest sources of electricity in most markets. Renewables now account for over 30% of global electricity generation and are growing rapidly.
+
+Electrification: Transitioning heating, cooling, cooking, and transportation from fossil fuels to electricity, which can then be generated from clean sources. Electric vehicle sales reached 10 million in 2022, 14% of all new car sales.
+
+Energy Efficiency: Reducing energy demand through improved building efficiency, industrial processes, and behavior change. Deep energy retrofits of existing buildings can reduce energy use by 50-80%.
+
+Carbon Capture: Technological approaches including direct air capture (DAC), bioenergy with carbon capture (BECCS), and enhanced weathering of minerals. Current DAC costs are $300-1000/tonne CO₂; scaling and cost reduction are critical.
+
+Nature-Based Solutions: Protecting and restoring forests, wetlands, and soils can store significant carbon while providing biodiversity and watershed benefits. Deforestation must be halted; reforestation scaled massively.
+
+Agricultural Reform: Reducing methane from livestock, nitrous oxide from fertilizers, and converting land use. Dietary shifts toward plant-rich diets can significantly reduce agricultural emissions.
+
+INTERNATIONAL POLICY
+
+The Paris Agreement (2015): 196 countries agreed to limit warming to well below 2°C and pursue efforts to limit it to 1.5°C. Each country submits Nationally Determined Contributions (NDCs) — voluntary emissions reduction pledges.
+
+Glasgow Climate Pact (COP26, 2021): Countries agreed to revisit and strengthen NDCs annually, phase down coal power, and mobilize $100 billion per year for developing country climate finance.
+
+Current Trajectory: Existing NDCs are insufficient — they would lead to approximately 2.7°C of warming by 2100. The "implementation gap" between pledges and actual policies is large. Meeting 1.5°C requires unprecedented societal transformation.
+
+Carbon Pricing: Over 70 countries and jurisdictions have implemented carbon taxes or cap-and-trade systems covering about 23% of global emissions. The European Union Emissions Trading System (EU ETS) is the world's largest carbon market.
+
+ADAPTATION
+
+Adaptation means adjusting to current and expected climate impacts. Adaptation is necessary even with aggressive mitigation because some warming is already locked in.
+
+Infrastructure: Designing buildings, roads, bridges, and coastal defenses for future climate conditions. This includes higher flood defenses, heat-resilient urban design, and drought-resistant water systems.
+
+Agriculture: Developing heat and drought-tolerant crop varieties, shifting planting seasons, and improving water efficiency. The CGIAR network conducts climate-adaptive agricultural research across the tropics.
+
+Health Systems: Preparing for heat-related illness, changing disease patterns (malaria, dengue expanding ranges), and mental health impacts of climate disasters.
+
+Managed Retreat: In some coastal and flood-prone areas, planned relocation of communities is the most cost-effective and humane adaptation response.
+
+Loss and Damage: Representing climate impacts beyond what can be adapted to, including displacement, cultural loss, and ecosystem destruction. The Warsaw International Mechanism addresses loss and damage, and a dedicated fund was established at COP27 (2022).

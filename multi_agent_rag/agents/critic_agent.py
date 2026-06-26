@@ -1,56 +1,73 @@
 from .base_agent import BaseAgent
 
+_SYSTEM = """You are a rigorous answer quality critic for a RAG system.
+
+Evaluate the draft answer against:
+1. ACCURACY — Is every claim supported by the source context? Flag hallucinations.
+2. COMPLETENESS — Does it address all aspects of the question?
+3. CLARITY — Is it well-written, logically structured, and free of jargon?
+4. CITATIONS — Are key facts properly attributed?
+5. CONCISENESS — Is it appropriately sized (not too long, not too short)?
+
+Output this exact structure:
+
+VERDICT: APPROVED | NEEDS_REVISION
+SCORE: <integer 1-10>
+
+STRENGTHS:
+- <bullet>
+
+ISSUES:
+- <bullet> (or "None")
+
+REVISION_INSTRUCTIONS:
+<Specific, actionable instructions for the synthesizer. Empty if APPROVED.>
+
+FINAL_ANSWER:
+<If APPROVED: copy the draft here verbatim.
+ If NEEDS_REVISION: write the improved version yourself applying your own instructions.>"""
+
 
 class CriticAgent(BaseAgent):
-    """Reviews and validates the synthesized answer for quality and accuracy."""
-
     name = "CriticAgent"
-    description = "Critically evaluates the synthesized answer for accuracy, completeness, and quality."
 
-    SYSTEM_PROMPT = """You are a rigorous quality control expert and critic. Review the synthesized answer against:
-1. The original user query — does it fully address what was asked?
-2. The source documents — are all claims supported by evidence?
-3. Completeness — are there important gaps or missing points?
-4. Clarity — is the answer well-written and easy to understand?
-5. Accuracy — are there any hallucinations or unsupported claims?
+    def run(self, query: str, draft_answer: str, context: str) -> dict:
+        self.log.info("Reviewing draft answer")
+        user_msg = (
+            f"Query: {query}\n\n"
+            f"Source Context (ground truth):\n{context[:4000]}\n\n"
+            f"Draft Answer to Review:\n{draft_answer}"
+        )
+        review = self._call(_SYSTEM, user_msg)
 
-Output your review in this structured format:
-- VERDICT: APPROVED / NEEDS_REVISION
-- SCORE: X/10
-- STRENGTHS: (bullet list)
-- ISSUES: (bullet list, empty if none)
-- SUGGESTIONS: (specific improvements if NEEDS_REVISION)
-- FINAL_ANSWER: (the improved or approved answer text)"""
+        verdict = "APPROVED" if "VERDICT: APPROVED" in review else "NEEDS_REVISION"
+        score = self._extract_score(review)
+        final = self._extract_section(review, "FINAL_ANSWER:", fallback=draft_answer)
+        instructions = self._extract_section(review, "REVISION_INSTRUCTIONS:", fallback="")
 
-    def run(self, query: str, synthesized_output: dict, context: str) -> dict:
-        synthesized_answer = synthesized_output.get("synthesized_answer", "")
-
-        messages = [
-            {
-                "role": "user",
-                "content": (
-                    f"Original Query: {query}\n\n"
-                    f"Source Context:\n{context}\n\n"
-                    f"Synthesized Answer to Review:\n{synthesized_answer}\n\n"
-                    "Critically evaluate this answer and provide your structured review."
-                ),
-            }
-        ]
-
-        review = self._call_claude(self.SYSTEM_PROMPT, messages)
-
-        # Extract the final answer from the critic's output
-        final_answer = self._extract_final_answer(review, synthesized_answer)
-
+        self.log.info("Critic verdict=%s score=%d/10", verdict, score)
         return {
-            "agent": self.name,
-            "query": query,
+            "verdict": verdict,
+            "score": score,
             "review": review,
-            "final_answer": final_answer,
+            "revision_instructions": instructions,
+            "final_answer": final,
         }
 
-    def _extract_final_answer(self, review: str, fallback: str) -> str:
-        marker = "FINAL_ANSWER:"
-        if marker in review:
-            return review.split(marker, 1)[1].strip()
+    @staticmethod
+    def _extract_score(text: str) -> int:
+        import re
+        m = re.search(r"SCORE:\s*(\d+)", text)
+        return int(m.group(1)) if m else 7
+
+    @staticmethod
+    def _extract_section(text: str, marker: str, fallback: str) -> str:
+        if marker in text:
+            after = text.split(marker, 1)[1]
+            # If there is a next section marker, stop there
+            import re
+            next_section = re.search(r"\n[A-Z_]+:\s*\n", after)
+            if next_section:
+                return after[:next_section.start()].strip()
+            return after.strip()
         return fallback

@@ -1,0 +1,79 @@
+Modern Economics and Finance: Markets, Policy, and Global Trends
+
+MACROECONOMIC FUNDAMENTALS
+
+Gross Domestic Product (GDP): The total monetary value of all goods and services produced within a country's borders in a given period. GDP = C + I + G + (X-M), where C is consumption, I is investment, G is government spending, X is exports, and M is imports. World GDP reached approximately $105 trillion in 2023. The US ($27T), China ($18T), Germany ($4.5T), Japan ($4.2T), and India ($3.7T) are the five largest economies.
+
+Inflation: The rate at which prices rise across the economy. Measured by the Consumer Price Index (CPI), which tracks a basket of goods and services. Central banks typically target 2% annual inflation as a balance between stimulating growth and preventing overheating. The post-COVID inflation surge (2021-2023) saw US inflation reach 9.1% in June 2022 — highest in 40 years — driven by supply chain disruptions, energy shocks (Russia-Ukraine war), and fiscal stimulus.
+
+Interest Rates: Central banks set short-term interest rates as their primary monetary policy tool. The Federal Reserve raised rates from 0.25% to 5.25-5.5% between March 2022 and July 2023 — the fastest rate hiking cycle in four decades — to combat inflation. Higher rates increase borrowing costs, cooling investment and consumption.
+
+Unemployment: Measured as the percentage of the labor force actively seeking work. Full employment (considered ~4% unemployment in the US) is a dual mandate target for the Federal Reserve. The COVID-19 pandemic caused US unemployment to spike to 14.7% in April 2020 — the highest since the Great Depression — before recovering to 3.5% by early 2023.
+
+Fiscal Policy: Government spending and taxation decisions. The US federal deficit reached $1.7 trillion in fiscal year 2023 — approximately 6.3% of GDP. High deficits increase the national debt (US national debt exceeds $33 trillion) and can crowd out private investment, though their macroeconomic impact depends on the interest rate environment.
+
+FINANCIAL MARKETS
+
+Stock Markets: Equities represent ownership shares in companies. The S&P 500 (500 largest US companies) has returned an average of ~10% annually since 1957, including dividends. The "efficient market hypothesis" suggests prices incorporate all available information, making consistent outperformance difficult. Behavioral finance (Kahneman and Tversky, Nobel 2002; Thaler, Nobel 2017) documents systematic deviations from rationality: loss aversion, anchoring, herd behavior, and overconfidence.
+
+Bond Markets: Fixed income securities representing loans to governments or corporations. The US Treasury market ($26 trillion) is the world's largest and most liquid market. Bond prices move inversely with interest rates. The 2022 bond market crash — triggered by the fastest rate hike cycle in decades — erased over $2 trillion in bond value, the worst year for bonds since the 1780s.
+
+Foreign Exchange (Forex): The world's largest financial market at $7.5 trillion daily trading volume. Exchange rates are determined by interest rate differentials, inflation, trade balances, and capital flows. The US dollar accounts for ~88% of all forex transactions and remains the world's reserve currency, though its dominance is slowly declining.
+
+Derivatives: Financial instruments whose value derives from underlying assets. Interest rate derivatives ($600 trillion notional), credit default swaps, and equity options enable hedging but also speculative leverage. Warren Buffett famously called derivatives "financial weapons of mass destruction" in 2002, presaging the 2008 financial crisis.
+
+Commodities: Raw materials traded globally. Oil (Brent crude, WTI), natural gas, gold, copper, agricultural products (wheat, corn, soybeans). Commodity prices affect inflation globally. The 2022 energy crisis following Russia's invasion of Ukraine drove natural gas prices up 400% in Europe.
+
+CRYPTOCURRENCY AND DIGITAL ASSETS
+
+Bitcoin: Created by pseudonymous Satoshi Nakamoto in 2008, Bitcoin is a decentralized digital currency using proof-of-work consensus and a blockchain (distributed ledger). There will only ever be 21 million Bitcoin. By late 2024, Bitcoin's market cap exceeded $1 trillion, with institutional adoption by BlackRock, Fidelity, and MicroStrategy.
+
+Blockchain Technology: A distributed, immutable ledger where transactions are recorded in "blocks" linked chronologically. Ethereum introduced smart contracts — self-executing code on the blockchain — enabling decentralized applications (dApps), decentralized finance (DeFi), and non-fungible tokens (NFTs).
+
+DeFi (Decentralized Finance): Replicating financial services (lending, borrowing, trading, insurance) on blockchain without banks. Automated Market Makers (AMMs) like Uniswap use algorithmic liquidity pools instead of order books. DeFi protocols locked $180 billion at peak (2021); collapsed to $40B after 2022 crypto crash.
+
+Stablecoins: Cryptocurrencies pegged to fiat currencies (USDC, USDT) or algorithmic mechanisms (TerraUST — failed catastrophically in May 2022, erasing $45 billion in days). Stablecoins processed $11 trillion in transactions in 2023 — more than Visa.
+
+Central Bank Digital Currencies (CBDCs): Government-issued digital currencies. China's digital yuan (e-CNY) has processed over $250 billion in transactions. The European Central Bank is developing a digital euro. CBDCs could enhance financial inclusion and payment efficiency but raise surveillance concerns.
+
+GLOBAL TRADE
+
+Trade Theory: Ricardo's comparative advantage shows that countries benefit from specializing in goods they produce most efficiently relative to other goods, even if another country is better at producing everything. This is the theoretical foundation for free trade.
+
+World Trade Organization (WTO): Rules-based framework governing international trade. Tariff reductions through WTO negotiations have lowered average global tariffs from 40%+ in the 1950s to ~5% today, supporting the massive expansion of global trade.
+
+Supply Chain Globalization: The "just-in-time" global supply chain, optimized for efficiency over decades, proved fragile during COVID-19. Semiconductor shortages, shipping container imbalances, and port congestion caused supply chain disruptions costing the global economy an estimated $4 trillion.
+
+US-China Trade Tensions: The US-China trade war (2018-present) involved tariffs on hundreds of billions of dollars of goods. The US has restricted semiconductor exports to China (particularly advanced chips and manufacturing equipment from NVIDIA, ASML). China has countered with export controls on gallium and germanium (critical semiconductor materials). Decoupling vs. "de-risking" is a central policy debate.
+
+Nearshoring and Friendshoring: Companies are shortening supply chains and moving production to geographically closer or politically allied countries. Mexico (benefiting from US nearshoring), Vietnam (electronics), and India (services) are beneficiaries. Apple, for example, is shifting iPhone production from China to India.
+
+DEVELOPMENT ECONOMICS
+
+The Great Divergence: Between 1820 and 1975, a massive income gap opened between Western countries and the rest of the world. Factors include the Industrial Revolution, colonialism, institutions, and geography. Since 1990, globalization and Chinese growth have reversed some of this divergence.
+
+Poverty Reduction: Global extreme poverty (under $2.15/day) has fallen from 36% in 1990 to under 10% today, largely due to China's growth. Over 1 billion people escaped extreme poverty in three decades. COVID-19 reversed some progress, pushing 70 million back into extreme poverty in 2020.
+
+Sustainable Development Goals (SDGs): The UN's 2030 agenda includes 17 goals covering poverty, hunger, health, education, gender equality, clean energy, and climate. Progress has been uneven; COVID-19 set back multiple goals by years.
+
+Foreign Direct Investment (FDI): Cross-border investment in productive assets (factories, infrastructure). FDI flows reached $1.3 trillion in 2023. Developing countries attract FDI through labor cost advantages, growing markets, and resource endowments.
+
+FINANCIAL REGULATION AND CRISES
+
+2008 Global Financial Crisis: The collapse of the US housing bubble and securitization of subprime mortgages into complex financial instruments (CDOs, MBS) triggered the worst financial crisis since the Great Depression. Lehman Brothers failed (largest bankruptcy in history). The Federal Reserve, Treasury, and FDIC deployed over $700 billion to stabilize the system. Global GDP fell 1.7% in 2009. The Dodd-Frank Act (2010) imposed stricter capital requirements (Basel III), stress tests, and consumer protections.
+
+Too Big to Fail: The bailout of large financial institutions (Citigroup, Bank of America, AIG) raised moral hazard concerns — banks may take excessive risks knowing governments will bail them out to prevent systemic collapse.
+
+2023 Banking Turmoil: Silicon Valley Bank (SVB) failed in March 2023 — the second largest US bank failure ever — after duration mismatches between long-term bond holdings and short-term deposit liabilities. Bank runs spread to Signature Bank and First Republic. The FDIC guaranteed all deposits (above the $250K insured limit) to prevent contagion.
+
+European Debt Crisis (2010-2015): Greece, Ireland, Portugal, and Cyprus required bailouts as sovereign debt became unsustainable. The European Central Bank's "whatever it takes" declaration by Mario Draghi in 2012 stabilized the eurozone.
+
+FUTURE ECONOMIC TRENDS
+
+Aging Demographics: Most developed economies face aging populations and declining working-age populations. Japan (median age 49) and Germany (median age 47) face productivity headwinds. Immigration, productivity growth through AI, and pension reform are the main policy levers.
+
+Automation and the Future of Work: AI and robotics are automating routine cognitive and physical tasks. Studies estimate 15-30% of current jobs could be substantially automated by 2030. New jobs created may not match displaced workers' skills or location. Universal Basic Income (UBI) is being piloted in Finland, Kenya, and multiple US cities.
+
+Green Finance: The Taskforce on Climate-related Financial Disclosures (TCFD) framework requires companies to disclose climate risks. ESG (Environmental, Social, Governance) investing manages over $35 trillion. Green bonds (proceeds fund environmental projects) issued $490 billion in 2023. The EU Taxonomy defines environmentally sustainable economic activities for capital markets.
+
+AI's Economic Impact: Goldman Sachs estimates AI could raise global GDP by 7% (~$7 trillion) over the next decade through productivity gains. McKinsey estimates $2.6-4.4 trillion of annual value could be generated by generative AI across sectors. The distributional effects — who captures the gains — are a central policy debate.

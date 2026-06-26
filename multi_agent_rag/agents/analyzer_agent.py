@@ -1,56 +1,51 @@
 from .base_agent import BaseAgent
 
+_SYSTEM = """You are an expert information analyst for a RAG system.
+
+Given a user query and retrieved document chunks, produce a deep analytical report with these sections:
+
+## Key Facts
+Bullet list of the most important, directly relevant facts extracted from the sources.
+
+## Supporting Evidence
+Specific quotes and data points from the sources that support the key facts.
+Always attribute: "According to [source]..."
+
+## Contradictions or Uncertainties
+Any conflicting information across sources, or claims that seem uncertain.
+
+## Information Gaps
+What the query asks for that is NOT answered by the retrieved context.
+
+## Synthesis Notes
+2-3 sentences summarising what a downstream writer needs to know to answer the query well.
+
+Be precise and analytical. Extract only what is grounded in the sources."""
+
 
 class AnalyzerAgent(BaseAgent):
-    """Analyzes retrieved documents to extract key facts and insights."""
-
     name = "AnalyzerAgent"
-    description = "Deeply analyzes retrieved chunks to extract key facts, entities, and insights relevant to the query."
 
-    SYSTEM_PROMPT = """You are an expert information analyst. Given a user query and retrieved document excerpts,
-your task is to:
-1. Identify the key facts, concepts, and entities directly relevant to the query
-2. Note any contradictions or conflicting information across sources
-3. Highlight the most important insights
-4. Flag any information gaps that would be needed to fully answer the query
-5. Summarize what is known and what is uncertain
-
-Be thorough and analytical. Use bullet points and structured output."""
-
-    def run(self, query: str, retrieved_data: dict) -> dict:
-        chunks = retrieved_data.get("retrieved_chunks", [])
-        retriever_analysis = retrieved_data.get("analysis", "")
-
+    def run(self, query: str, retrieval_output: dict) -> dict:
+        chunks = retrieval_output.get("retrieved_chunks", [])
         if not chunks:
             return {
-                "agent": self.name,
-                "query": query,
-                "key_facts": [],
-                "analysis": "No information available to analyze.",
-                "gaps": ["No documents found in knowledge base"],
+                "analysis": "Insufficient context to perform analysis.",
+                "context_for_synthesis": "",
             }
 
         context = "\n\n".join(
-            f"[Source {i+1}]: {c['content']}" for i, c in enumerate(chunks)
+            f"[Source: {c['metadata'].get('filename', 'unknown')}]\n{c['content']}"
+            for c in chunks
         )
-
-        messages = [
-            {
-                "role": "user",
-                "content": (
-                    f"User Query: {query}\n\n"
-                    f"Retriever Analysis:\n{retriever_analysis}\n\n"
-                    f"Raw Document Chunks:\n{context}\n\n"
-                    "Perform a deep analysis of this information to extract key facts, insights, and gaps."
-                ),
-            }
-        ]
-
-        analysis = self._call_claude(self.SYSTEM_PROMPT, messages)
-
+        user_msg = (
+            f"User Query: {query}\n\n"
+            f"Retrieval Analysis:\n{retrieval_output.get('retrieval_analysis', '')}\n\n"
+            f"Document Chunks:\n{context}"
+        )
+        self.log.info("Analysing %d chunks for query", len(chunks))
+        analysis = self._call(_SYSTEM, user_msg)
         return {
-            "agent": self.name,
-            "query": query,
-            "context_used": context,
             "analysis": analysis,
+            "context_for_synthesis": context,
         }

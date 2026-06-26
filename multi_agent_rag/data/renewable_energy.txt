@@ -1,0 +1,113 @@
+Renewable Energy: Technologies, Economics, and the Global Transition
+
+OVERVIEW
+
+Renewable energy is derived from naturally replenishing sources that will not be depleted by use: sunlight, wind, water, geothermal heat, and biological materials. The global transition to renewable energy is accelerating dramatically, driven by falling costs, climate imperatives, and energy security concerns following the 2022 Russian invasion of Ukraine.
+
+In 2023, renewables accounted for 30% of global electricity generation, up from 22% in 2015. Over 90% of new electricity generation capacity added in 2023 was from renewable sources. The International Energy Agency (IEA) projects renewables will generate 80% of global electricity by 2050 in net-zero scenarios.
+
+SOLAR POWER
+
+Photovoltaic Technology: Solar PV converts photons directly into electricity via the photovoltaic effect. When light strikes a semiconductor (typically crystalline silicon), electrons are excited across the bandgap, creating a current. A single silicon solar cell generates about 0.5-0.6 volts; panels connect cells in series and parallel.
+
+Types of Solar PV:
+- Monocrystalline Silicon: Highest efficiency (20-26%), premium product. Individual cells cut from single silicon crystals.
+- Polycrystalline Silicon: Slightly lower efficiency (15-20%), lower cost. Cells made from multiple silicon crystals.
+- Thin-Film (CdTe, CIGS): Lower efficiency (10-16%), flexible applications, rapidly declining costs.
+- Perovskite Solar Cells: Emerging technology with lab efficiencies exceeding 33% in tandem configurations. Expected to commercialize in the late 2020s.
+- Concentrated Photovoltaics (CPV): Uses lenses to concentrate sunlight on high-efficiency III-V semiconductor cells, achieving efficiencies over 40%.
+
+Cost Revolution: Solar PV costs have fallen over 90% since 2010. The levelized cost of energy (LCOE) for utility-scale solar is now $20-50/MWh in most markets — cheaper than any fossil fuel. Module prices have fallen from $4/W in 2010 to under $0.15/W in 2024.
+
+Concentrated Solar Power (CSP): Uses mirrors to concentrate sunlight and generate heat to drive a turbine. CSP can incorporate thermal storage (molten salt), enabling solar power generation hours after sunset. The Noor Ouarzazate complex in Morocco (580 MW) is the world's largest CSP plant.
+
+Agrivoltaics: Combining agriculture with solar panels on the same land. Panels provide partial shade, reducing water evaporation and heat stress for crops. Studies show some crops grow better under panels due to reduced evapotranspiration. Land use efficiency increases by 60-70%.
+
+Solar Manufacturing: China dominates solar manufacturing, producing over 80% of global solar panels. Xinjiang province supplies ~45% of global polysilicon, raising human rights concerns. Western countries are investing to build domestic supply chains (US Inflation Reduction Act, EU Net Zero Industry Act).
+
+WIND POWER
+
+Onshore Wind: The most cost-competitive electricity source in most markets, with LCOE of $25-50/MWh. Modern utility-scale turbines have hub heights of 100-140m and rotor diameters of 120-180m. Each turbine generates 2-5 MW. Wind turbines operate 25-30% of the time at full capacity (capacity factor), compared to 20-25% for solar.
+
+Offshore Wind: Wind speeds over the ocean are higher and more consistent. Offshore turbines are much larger — Siemens Gamesa's SG 14-222 DD generates 14-15 MW per turbine with a rotor diameter of 222m (larger than the London Eye). LCOE of $80-120/MWh is higher than onshore but falling rapidly. The UK leads the world in offshore wind with over 14 GW installed.
+
+Floating Offshore Wind: Fixed-bottom turbines are limited to water depths under 60m. Floating platforms extend wind power to deeper water, opening enormous resources off the coasts of California, Japan, Norway, and elsewhere. Hywind Tampen (Norway, 2022) is the world's largest floating wind farm at 88 MW.
+
+Wind Energy Storage Challenge: Wind is variable — it doesn't blow at a constant speed. Grid integration requires:
+- Transmission: Connecting windy areas (often rural) to demand centers (cities)
+- Storage: Batteries, pumped hydro, hydrogen
+- Demand Response: Shifting electricity use to when wind is abundant
+- Overbuilding: Installing more capacity than average demand so even low-wind periods meet needs
+
+Wind Turbine Life Cycle: Turbines last 20-30 years. Recycling turbine blades (made of fiberglass/epoxy composites) is a challenge — most end up in landfills. New thermoset resin designs enable chemical recycling. Companies like Veolia are developing blade grinding for cement production.
+
+HYDROPOWER
+
+Hydropower is the largest source of renewable electricity globally, providing about 16% of world electricity. It converts the kinetic and potential energy of flowing or falling water into electricity.
+
+Conventional Hydropower: Large dams create reservoirs, releasing water through turbines. Three Gorges Dam in China (22,500 MW) is the world's largest power plant of any kind. Provides highly reliable, dispatchable power.
+
+Run-of-River: No storage dam; uses natural river flow. Less environmental impact but variable output dependent on river flow.
+
+Pumped Storage Hydropower: The dominant form of grid-scale electricity storage. During low demand/high renewable generation, electric pumps move water from a lower to upper reservoir. During peak demand, water flows down through turbines. Currently represents 94% of global grid storage capacity (>180 GW).
+
+Environmental Impacts: Large dams flood ecosystems and displace communities. China's Three Gorges Dam displaced 1.2 million people. Dams block sediment and fish migration. Many rivers have been damaged beyond recovery. New large-scale hydro projects face increasing opposition.
+
+Small-Scale Hydropower: Run-of-river micro-hydro (under 100 kW) serves rural communities in mountainous regions with minimal environmental impact. Nepal, Peru, and China have extensive small hydro programs.
+
+GEOTHERMAL ENERGY
+
+Geothermal energy uses the heat naturally produced by Earth's interior, primarily from radioactive decay of elements. Temperatures reach 5500°C at Earth's core.
+
+Conventional Geothermal: In volcanically active regions (Iceland, The Geysers in California, New Zealand, Kenya, Philippines), steam from hydrothermal reservoirs drives turbines directly. Iceland generates 30% of its electricity and 90% of its heating from geothermal.
+
+Enhanced Geothermal Systems (EGS): Drilling into hot dry rock anywhere, fracturing it hydraulically, and circulating water to extract heat. Theoretically available worldwide, EGS could provide 100x global electricity demand. Fervo Energy drilled commercial EGS wells in Utah in 2024 at costs approaching conventional geothermal.
+
+Direct Heat Use: Geothermal can provide direct heat for district heating, greenhouses, fish farms, and industrial processes. Paris's district heating network uses geothermal. Geothermal heat pumps use shallow Earth temperatures (10-15°C year-round) for efficient building heating and cooling.
+
+OCEAN ENERGY
+
+Tidal Power: Uses tidal currents or the rise and fall of tides. Tidal range turbines (Swansea Bay Tidal Lagoon, UK) and tidal stream turbines (MeyGen, Scotland — 6 MW) are operating. Highly predictable — tides can be forecast centuries in advance.
+
+Wave Power: Harnesses the oscillatory motion of ocean waves. Despite decades of research, wave power has proven technically difficult and expensive. Companies including CorPower Ocean and Eco Wave Power are developing commercial systems.
+
+Ocean Thermal Energy Conversion (OTEC): Uses the temperature difference between warm surface water and cold deep water. Theoretical resource is enormous (especially in tropical oceans) but high capital costs have limited deployment.
+
+ENERGY STORAGE
+
+The Achilles' heel of renewable energy is variability — the sun doesn't always shine and the wind doesn't always blow. Storage is essential for a high-renewable grid.
+
+Lithium-Ion Batteries: Dominant grid storage technology. Battery energy storage system (BESS) costs have fallen from $1,200/kWh in 2010 to under $150/kWh in 2024. Grid batteries can respond in milliseconds. The Hornsdale Power Reserve in South Australia (200 MW) demonstrated that large batteries can replace fossil fuel peakers.
+
+Alternative Battery Technologies:
+- Iron-Air (Form Energy): Uses the rusting/de-rusting of iron to store energy for 100+ hours. Low material cost. Announced commercial scale manufacturing in West Virginia.
+- Vanadium Redox Flow: Long duration (4-12 hours), long cycle life, electroyte can be recycled indefinitely. Higher cost than lithium-ion.
+- Sodium-Ion: Uses earth-abundant sodium instead of lithium. Lower energy density but lower cost. CATL began commercial production in 2023.
+
+Green Hydrogen: Electrolyzers use electricity to split water into hydrogen and oxygen. Green hydrogen (from renewable electricity) can store energy seasonally. Hydrogen can be transported, used in industry (steel, ammonia), and converted back to electricity in fuel cells or turbines. Cost must fall from $5-8/kg today to $1-2/kg to compete with natural gas.
+
+Pumped Hydro Storage: As noted above, this is the world's largest storage resource. Projects like Eagle Mountain in California (5,000 MW) and Turkey-sized long-duration systems in Australia are planned.
+
+THE ECONOMICS OF ENERGY TRANSITION
+
+The energy transition is fundamentally economic. Renewables are now cheaper than fossil fuels in most contexts.
+
+Learning Rates: Each doubling of cumulative installed capacity reduces costs by a characteristic percentage. Solar PV has a 20% learning rate (each doubling = 20% cost reduction), wind is 15%. These "learning curves" mean renewable costs will continue to fall.
+
+Grid Parity: The point where renewable electricity costs equal or undercut conventional electricity. Solar has reached grid parity in most of the world. The question is now about system integration costs (grid upgrades, storage).
+
+System Costs: A high-renewable grid requires investment in transmission, storage, and flexible demand. These system costs must be factored in alongside low generation costs.
+
+Jobs: The renewable energy sector employed 13.7 million people worldwide in 2022, up from 7.3 million in 2012. Solar PV installation is the fastest-growing job in the US. Fossil fuel job losses (in coal particularly) require just transition policies.
+
+GLOBAL STATUS
+
+China: Installed more solar in 2023 (217 GW) than the entire world installed in 2021. Target of 1,200 GW of wind and solar by 2030, already achieved in 2023. Dominant in manufacturing solar panels, wind turbines, batteries, and EVs.
+
+United States: The Inflation Reduction Act (2022) invested $369 billion in clean energy incentives, the largest climate investment in US history. Domestic manufacturing of clean energy equipment is growing rapidly.
+
+European Union: The REPowerEU plan accelerated renewable deployment following the 2022 energy crisis. Target of 45% renewable energy by 2030 under the Renewable Energy Directive.
+
+India: Target of 500 GW of non-fossil capacity by 2030. World's largest solar park (Bhadla, 2,245 MW). Renewable energy now cheaper than new coal in India.
+
+Africa: Massive untapped renewable potential, particularly solar. Only 40% of Africans have electricity access. Distributed solar systems are electrifying villages faster than grid extension.

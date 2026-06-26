@@ -1,4 +1,5 @@
-from .document_store import DocumentStore
+from .document_store import DocumentStore, Document, Chunk
+from .ingestion import Ingestion
 from .retriever import VectorRetriever
 
-__all__ = ["DocumentStore", "VectorRetriever"]
+__all__ = ["DocumentStore", "Document", "Chunk", "Ingestion", "VectorRetriever"]

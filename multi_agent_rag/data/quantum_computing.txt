@@ -1,0 +1,75 @@
+Quantum Computing: Principles, Hardware, and Applications
+
+INTRODUCTION
+
+Quantum computing harnesses the principles of quantum mechanics to process information in fundamentally different ways from classical computers. While classical computers store information as bits (0 or 1), quantum computers use quantum bits or "qubits" that can exist in superpositions of 0 and 1 simultaneously. This, combined with entanglement and interference, allows quantum computers to explore many possible solutions simultaneously for certain problem types.
+
+The theoretical foundations were laid by Richard Feynman (1981), who proposed using quantum systems to simulate physics, and David Deutsch (1985), who formalized the quantum Turing machine. Peter Shor's 1994 factoring algorithm and Lov Grover's 1996 search algorithm demonstrated concrete quantum advantages, igniting a global research effort.
+
+QUANTUM MECHANICAL PRINCIPLES
+
+Superposition: A qubit can exist as a combination of |0⟩ and |1⟩ states: |ψ⟩ = α|0⟩ + β|1⟩, where α and β are complex probability amplitudes with |α|² + |β|² = 1. When measured, the qubit collapses to |0⟩ with probability |α|² or |1⟩ with probability |β|². An n-qubit system can represent 2ⁿ states simultaneously.
+
+Entanglement: Two or more qubits can be entangled such that measuring one instantly determines the state of the other, regardless of distance. The Bell state |Φ⁺⟩ = (|00⟩ + |11⟩)/√2 is maximally entangled — if one qubit is measured as 0, the other is guaranteed to be 0. Einstein called this "spooky action at a distance."
+
+Quantum Interference: Quantum algorithms manipulate probability amplitudes to amplify paths leading to correct answers and cancel paths leading to wrong answers. This is the mechanism by which quantum speedups are achieved — it is NOT simply trying all answers simultaneously.
+
+Decoherence: Interaction with the environment causes qubits to lose their quantum properties (decoherence). Maintaining quantum coherence long enough to perform computations is the primary engineering challenge. Current systems operate at millikelvin temperatures (0.015 K) to minimize thermal noise.
+
+QUANTUM HARDWARE PLATFORMS
+
+Superconducting Qubits: The leading approach for near-term quantum computers. Superconducting circuits cooled to near absolute zero behave as artificial atoms with quantized energy levels. IBM, Google, and Rigetti use this approach. Google's Sycamore processor (53 qubits, 2019) claimed quantum supremacy by completing a specific computation in 200 seconds that they estimated would take 10,000 years classically. IBM's quantum roadmap targets 100,000+ qubits by 2033.
+
+Trapped Ion Qubits: Individual ions suspended in electromagnetic traps act as qubits, controlled by laser pulses. IonQ and Quantinuum use this approach. Trapped ions have higher gate fidelities (~99.9%) than superconducting qubits (~99.5%) but operate more slowly. Quantinuum's H2 processor demonstrated 56 qubits with industry-leading performance.
+
+Photonic Quantum Computing: Qubits encoded in photons (particles of light). PsiQuantum is building a million-qubit photonic quantum computer using standard semiconductor manufacturing. Photonic systems can operate at room temperature and are naturally suited for quantum communication.
+
+Neutral Atom Qubits: Arrays of neutral atoms trapped in optical tweezers. QuEra and Pasqal use this approach. Harvard's group demonstrated a 48-qubit neutral atom computer with record-low error rates. Neutral atoms can be reconfigured, enabling dynamic circuit topologies.
+
+Topological Qubits: Microsoft's approach, using exotic quasiparticles called Majorana fermions that are theoretically immune to decoherence. Still in research phase but promises inherently fault-tolerant qubits.
+
+QUANTUM ALGORITHMS
+
+Shor's Algorithm: Factors large integers in polynomial time O((log N)³), compared to the best classical algorithm's sub-exponential time. A quantum computer running Shor's algorithm could break RSA-2048 encryption in hours rather than millions of years. This threatens current public-key cryptography infrastructure.
+
+Grover's Algorithm: Searches an unsorted database of N items in O(√N) time, versus O(N) classically — a quadratic speedup. Applications include database search, optimization, and cryptanalysis.
+
+Quantum Simulation: Simulating quantum systems (molecules, materials) that are intractable for classical computers. Applications in drug discovery, battery design, and materials science. The Variational Quantum Eigensolver (VQE) and Quantum Approximate Optimization Algorithm (QAOA) are near-term approaches.
+
+Quantum Machine Learning: Quantum versions of linear algebra operations (matrix multiplication, eigenvalue decomposition) can be exponentially faster for certain data structures. Quantum principal component analysis, quantum support vector machines, and quantum neural networks are active research areas, though rigorous quantum advantages remain elusive.
+
+Quantum Error Correction: Quantum states are fragile. Error correction encodes a logical qubit into many physical qubits. The surface code, a leading approach, requires approximately 1,000 physical qubits per logical qubit for fault-tolerant operation. Google demonstrated a logical qubit with below-threshold error rates in 2023, a critical milestone.
+
+CURRENT STATE: NISQ ERA
+
+We are currently in the NISQ (Noisy Intermediate-Scale Quantum) era — devices with 50–1000+ qubits but without full error correction. NISQ devices have limited coherence times, high error rates, and constrained connectivity.
+
+IBM Quantum Network: IBM provides cloud access to quantum computers through IBM Quantum. Their 127-qubit Eagle, 433-qubit Osprey, and 1121-qubit Condor processors are accessible to researchers worldwide. IBM has processed over 1 trillion quantum circuits through their cloud platform.
+
+Quantum Volume: IBM's metric for overall quantum computer performance, accounting for qubit count, connectivity, gate fidelity, and circuit depth. Systems with higher quantum volume can run more complex algorithms.
+
+Utility-Scale Quantum: IBM's 127-qubit processors have been used to study quantum magnetism (Ising models) at circuit depths beyond classical simulation, demonstrating "quantum utility" — solving physics problems beyond classical computers for specific tasks.
+
+APPLICATIONS
+
+Cryptography: Post-quantum cryptography (PQC) — classical algorithms resistant to quantum attacks — is being standardized by NIST. CRYSTALS-Kyber (key encapsulation) and CRYSTALS-Dilithium (digital signatures) are the primary selections. Organizations must begin "harvest now, decrypt later" migration immediately.
+
+Drug Discovery: Simulating molecular interactions precisely for drug design. Quantum computers could simulate complex protein folding and drug binding with chemical accuracy, potentially transforming pharmaceutical research.
+
+Financial Optimization: Portfolio optimization, risk analysis, and derivative pricing involve high-dimensional optimization problems where quantum algorithms may provide advantages. JPMorgan, Goldman Sachs, and Barclays have active quantum computing research programs.
+
+Supply Chain and Logistics: Optimization problems like vehicle routing, scheduling, and inventory management are potentially amenable to quantum speedups. Volkswagen has experimented with quantum optimization for traffic flow.
+
+Materials Science: Designing new materials for batteries, semiconductors, and superconductors. The nitrogen-vacancy center in diamond, a quantum system, is used as a highly sensitive magnetometer.
+
+TIMELINE TO FAULT-TOLERANT QUANTUM COMPUTING
+
+IBM Roadmap (2023–2033): Gate-based superconducting quantum computers scaling from 1,000 to 100,000+ physical qubits, targeting fault-tolerant operation with surface codes. Error rates must improve another order of magnitude.
+
+Google Quantum AI: Targeting a "below threshold" error correction demonstration (achieved 2023) as the first step toward a million-physical-qubit fault-tolerant system by the early 2030s.
+
+Expert Consensus: Most experts estimate fault-tolerant quantum computers capable of breaking RSA-2048 are 10-20 years away, requiring millions of physical qubits. Near-term NISQ devices will find application in quantum simulation and specific optimization tasks before that.
+
+QUANTUM INTERNET
+
+Beyond computation, quantum mechanics enables secure communication. Quantum Key Distribution (QKD) uses entangled photons to distribute encryption keys with information-theoretic security — any eavesdropping disturbs the quantum states and is detectable. China's Micius satellite has demonstrated intercontinental QKD. The European Quantum Internet Alliance is building a quantum communication backbone across the continent.

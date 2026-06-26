@@ -1,0 +1,137 @@
+Large Language Models: Architecture, Training, and Applications
+
+WHAT ARE LARGE LANGUAGE MODELS?
+
+Large Language Models (LLMs) are neural networks with billions to trillions of parameters, trained on massive text corpora to predict the next token in a sequence. Despite this seemingly simple objective, LLMs acquire broad knowledge and capabilities that generalize across tasks. The key insight is that next-token prediction, applied at massive scale, produces a model that implicitly learns grammar, facts, reasoning, and even theory of mind.
+
+LLMs represent the current state of the art for natural language processing tasks including text generation, translation, summarization, question answering, code generation, and complex reasoning.
+
+TRANSFORMER ARCHITECTURE IN DEPTH
+
+The transformer, introduced in "Attention Is All You Need" (Vaswani et al., 2017), is the foundational architecture.
+
+Self-Attention Mechanism: For each token, self-attention computes how much to "attend" to every other token. Given a sequence of token embeddings, the model computes:
+- Queries (Q): What am I looking for?
+- Keys (K): What do I contain?
+- Values (V): What do I contribute?
+
+Attention scores = softmax(QKᵀ / √d_k) · V
+
+This allows each token to gather information from any other token in the sequence, regardless of distance — unlike RNNs where distant tokens must pass information through many sequential steps.
+
+Multi-Head Attention: Multiple attention heads run in parallel, each learning different relationship types (syntactic, semantic, positional). Outputs are concatenated and projected.
+
+Feed-Forward Network: After attention, each position passes through a two-layer MLP with a non-linearity (typically GELU). This provides additional capacity for computing complex functions.
+
+Layer Normalization and Residual Connections: Each sublayer (attention, FFN) has a residual connection (output = input + sublayer(input)) and layer normalization, enabling training of very deep networks.
+
+Positional Encoding: Since transformers process all tokens in parallel, positional information must be added explicitly. Modern LLMs use Rotary Position Embedding (RoPE) or ALiBi for length generalization.
+
+Context Length: The number of tokens a model can process simultaneously. Early transformers handled 512 tokens; modern LLMs support 100K-1M tokens. Scaling context length requires attention mechanisms with sub-quadratic complexity (Sliding Window Attention, Flash Attention, linear attention variants).
+
+PRETRAINING
+
+Data Collection: LLMs are trained on diverse internet text. The Pile (825GB), Common Crawl, Wikipedia, arXiv, GitHub, Books3, and other sources are typical. Data quality filtering removes duplicates, adult content, and low-quality text. The Chinchilla paper (Hoffmann et al., 2022) showed that training an LLM for the compute-optimal number of tokens requires approximately 20 tokens per parameter.
+
+Tokenization: Text is broken into tokens using byte-pair encoding (BPE) or SentencePiece. Tokens are not words — they are frequent character sequences. GPT-4's tokenizer has ~100,000 tokens. "Tokenization" → ["Token", "ization"]; "ChatGPT" → ["Chat", "G", "PT"].
+
+Training Objective: Autoregressive language modeling: given tokens t₁, t₂, ..., tₙ₋₁, predict tₙ. The loss is cross-entropy averaged over all positions. Training minimizes this loss over hundreds of billions to trillions of tokens.
+
+Hardware: LLMs require thousands of GPUs or TPUs. GPT-3 (175B) trained on ~1000 A100 GPUs for months. Llama 2 (70B) used 2,000 A100 GPUs for 1.7M GPU-hours. Model parallelism (tensor, pipeline, data) distributes the computation.
+
+Compute Costs: Training a frontier LLM costs $10M-$500M in compute. Inference is also expensive — serving GPT-4 at scale requires massive data center infrastructure. Efficiency techniques (quantization, distillation, speculative decoding) reduce inference costs.
+
+ALIGNMENT AND FINE-TUNING
+
+Raw pre-trained LLMs are not optimized to be helpful assistants — they simply complete text. Alignment techniques transform them into useful, safe assistants.
+
+Supervised Fine-Tuning (SFT): Human annotators write example conversations (instruction, desired response). The model is fine-tuned on these examples. This teaches the model to follow instructions and adopt the desired format.
+
+Reinforcement Learning from Human Feedback (RLHF): Human raters compare pairs of model outputs and indicate which is better. A reward model is trained to predict human preferences. The LLM is then fine-tuned using PPO (Proximal Policy Optimization) to maximize the reward model's score. This technique, used by InstructGPT/ChatGPT/Claude, dramatically improves instruction-following and reduces harmful outputs.
+
+Constitutional AI (CAI): Anthropic's technique where the AI critiques its own outputs based on a set of principles (the "constitution") and revises them. This reduces reliance on human feedback for harmful content identification. Claude is trained using CAI.
+
+Direct Preference Optimization (DPO): A simpler alternative to RLHF that directly optimizes the policy to prefer better completions without training a separate reward model. DPO has become popular for its simplicity and competitive performance.
+
+CAPABILITIES AND EMERGENT BEHAVIORS
+
+In-Context Learning: LLMs can learn new tasks from examples provided in the prompt, without updating weights. Zero-shot (no examples), few-shot (2-10 examples), and many-shot (hundreds of examples in context) learning are all possible.
+
+Chain-of-Thought Reasoning: Prompting the model to "think step by step" dramatically improves performance on reasoning tasks. When models generate intermediate reasoning steps before the final answer, they perform significantly better on math, logic, and common-sense reasoning.
+
+Emergent Capabilities: As models scale, new capabilities appear suddenly that were not present at smaller scales. Examples include multi-step arithmetic, word unscrambling, and chain-of-thought reasoning. This non-linear scaling behavior is a subject of intense study.
+
+Code Generation: LLMs trained on code (GitHub Copilot, Code Llama, Codestral) can write functional code across dozens of programming languages, explain code, find bugs, and write tests. They are transforming software development.
+
+Mathematical Reasoning: Frontier models can solve competition-level mathematics. OpenAI's o1 model scored in the 90th percentile on the AMC 12 math competition. Models augmented with formal verification tools can produce provably correct mathematical proofs.
+
+RETRIEVAL AUGMENTED GENERATION (RAG)
+
+RAG is the combination of LLMs with information retrieval, enabling models to access external knowledge at inference time.
+
+Why RAG?: LLMs have knowledge cutoffs (training data ends at a certain date) and cannot update knowledge without retraining. They also hallucinate — generating plausible-sounding but incorrect information. RAG grounds model outputs in retrieved, verifiable documents.
+
+RAG Architecture:
+1. Document corpus is chunked into passages
+2. Passages are embedded into vectors using an embedding model
+3. At query time, the query is embedded and similar passages are retrieved
+4. Retrieved passages are provided in the model's context
+5. The model generates an answer grounded in the retrieved context
+
+Advanced RAG Techniques:
+- HyDE (Hypothetical Document Embeddings): Generate a hypothetical answer, embed it, use it for retrieval
+- Query Decomposition: Break complex queries into sub-queries
+- Step-Back Prompting: Abstract the query to retrieve broader context
+- Iterative Retrieval: Retrieve, generate, then retrieve more based on the partial answer
+- FLARE: Forward-Looking Active REtrieval — model retrieves when it's about to generate uncertain content
+- Self-RAG: Model learns when to retrieve and how to critique retrieved passages
+
+Reranking: A cross-encoder model (slower but more accurate than bi-encoder) reranks the top-K retrieved passages. Cohere Rerank, BGE-reranker, and similar models significantly improve retrieval precision.
+
+MULTI-AGENT LLM SYSTEMS
+
+Multiple LLMs can collaborate to solve complex tasks beyond any single model's capability.
+
+Orchestrator-Worker Pattern: An orchestrator LLM decomposes tasks and delegates subtasks to specialized worker LLMs. Each worker completes its subtask and returns results to the orchestrator.
+
+Debate and Critique: Multiple models generate competing answers; a judge model evaluates them. This reduces errors compared to single-model generation.
+
+LangGraph: A framework for building stateful, multi-agent LLM applications as graphs. Nodes represent computation steps (LLM calls, tool use, human input); edges represent transitions. Supports cycles (important for iterative refinement), parallel execution, and human-in-the-loop.
+
+AutoGen: Microsoft's framework for multi-agent conversations. Agents with different roles (Coder, Critic, Planner) exchange messages to collaboratively solve tasks.
+
+BENCHMARKS AND EVALUATION
+
+MMLU (Massive Multitask Language Understanding): 57 academic subjects, multiple-choice. GPT-4: 86.4%, Claude 3 Opus: 86.8%, human expert: ~89%.
+
+HumanEval: Code generation benchmark. 164 Python programming problems. GPT-4: 67%, Claude 3.5 Sonnet: 92%.
+
+MATH: 12,500 competition mathematics problems. GPT-4: 42%, OpenAI o1: 74%, human expert: 90%.
+
+GPQA (Graduate-Level Professional Questions): Expert-level science questions that are "google-proof." GPT-4: 36%, Claude 3 Opus: 50%, expert human: 65%.
+
+Limitations of Benchmarks: "Teaching to the test" — when models are trained on benchmark-like data. Benchmark saturation — frontier models approach human performance on older benchmarks. The Turing Test has been passed in restricted settings but remains philosophically contested.
+
+FRONTIER MODELS (2024-2025)
+
+GPT-4o: OpenAI's multimodal model processing text, audio, and images natively in a single model. Faster and cheaper than GPT-4. Supports real-time audio conversation.
+
+Claude 3.5 Sonnet/Opus: Anthropic's frontier models excelling at coding, reasoning, and following complex instructions. Introduced "computer use" — the ability to interact with desktop applications.
+
+Gemini 1.5 Pro: Google DeepMind's model with 1 million token context window, enabling analysis of entire codebases, hour-long videos, or full books.
+
+Llama 3: Meta's open-weight model (available for research and commercial use) approaching proprietary model performance. 70B and 405B parameter variants.
+
+Mistral Large: European frontier model from Mistral AI, competitive with GPT-4 on many benchmarks.
+
+RISKS AND LIMITATIONS
+
+Hallucination: LLMs generate confident-sounding false information. This is an inherent property of probabilistic text generation, not a bug to be fixed. RAG, grounding, and verification pipelines mitigate but do not eliminate hallucinations.
+
+Context Window Limitations: Even million-token context windows have limitations — models attend poorly to information in the middle of long contexts ("lost in the middle" phenomenon).
+
+Reasoning Limits: LLMs struggle with complex multi-step reasoning requiring more steps than can be completed in a single generation. Chain-of-thought and tool use help but don't fully solve this.
+
+Security: Prompt injection attacks trick models into following malicious instructions embedded in retrieved content. Jailbreaking attempts bypass safety training.
+
+Economic Disruption: LLMs are automating knowledge work tasks across writing, coding, legal, medical, and creative domains, raising concerns about displacement of white-collar workers.

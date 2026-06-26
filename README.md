@@ -10,7 +10,7 @@ A production-quality **Retrieval Augmented Generation (RAG)** system built with 
 User Query
     │
     ▼
-┌─────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────┐
 │                     OrchestratorAgent                        │
 │  (Coordinates the full pipeline, manages agent lifecycle)    │
 └──────────┬───────────────────────────────────────────────────┘
@@ -19,21 +19,21 @@ User Query
            ▼
 ┌──────────────────────┐      ┌──────────────────────────────┐
 │   RetrieverAgent     │◄────►│   Vector Store (FAISS-style) │
-│                      │      │   sentence-transformers       │
+│                      │      │   sentence-transformers      │
 │  • Vector search     │      │   cosine similarity          │
 │  • Relevance filter  │      └──────────────────────────────┘
 │  • Source ranking    │
 └──────────┬───────────┘
            │  Step 2
            ▼
-┌──────────────────────┐
-│   AnalyzerAgent      │
-│                      │
-│  • Key fact extract  │
-│  • Entity linking    │
-│  • Gap detection     │
+┌───────────────────────┐
+│   AnalyzerAgent       │
+│                       │
+│  • Key fact extract   │
+│  • Entity linking     │
+│  • Gap detection      │
 │  • Contradiction check│
-└──────────┬───────────┘
+└──────────┬────────────┘
            │  Step 3
            ▼
 ┌──────────────────────┐

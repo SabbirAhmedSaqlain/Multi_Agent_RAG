@@ -70,6 +70,7 @@ Most similar chunks returned → fed to the LLM as context
 Raw Text File
     │
     ▼
+ 
 Ingestion Pipeline (cleaning, chunking with overlap)
     │
     ├── Chunk 0: "FAISS is a library by Meta..."
@@ -93,8 +94,8 @@ SentenceTransformer ("all-MiniLM-L6-v2")
 │  Approximate nearest-neighbor search           │
 │  Survives process restarts                     │
 └────────────────────────────────────────────────┘
-```
-
+ ```
+ 
 ### FAISS vs ChromaDB vs NumPy
 
 | | **NumPy** | **FAISS** | **ChromaDB** |

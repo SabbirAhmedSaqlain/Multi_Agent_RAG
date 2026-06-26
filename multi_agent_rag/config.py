@@ -1,0 +1,11 @@
+import os
+
+CLAUDE_MODEL = "claude-opus-4-8"
+EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+
+MAX_TOKENS = 8192
+CHUNK_SIZE = 500
+CHUNK_OVERLAP = 50
+TOP_K_RESULTS = 5
+
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")

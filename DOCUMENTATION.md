@@ -58,7 +58,7 @@ Entry points:
 | Entry point | File | Use |
 |---|---|---|
 | Interactive / one-shot CLI | `multi_agent_rag/main.py` | development, demos, scripting |
-| REST API | `multi_agent_rag/api.py` | production serving |
+| Web UI + Swagger + REST API | `multi_agent_rag/api.py` | production serving (`/`, `/docs`, `/redoc`) |
 | Data management CLI | `multi_agent_rag/ingest_cli.py` | ingestion, refresh, health checks (cron-friendly) |
 
 ---
@@ -263,9 +263,18 @@ Ways to run it (pick one):
 
 ---
 
-## 5. REST API (`api.py`)
+## 5. Web UI, Swagger & REST API (`api.py`)
 
-Interactive docs at `http://localhost:8000/docs` (Swagger UI).
+Three front doors, all served by the same FastAPI process:
+
+| URL | What |
+|---|---|
+| `/` | **Web UI** ([static/index.html](multi_agent_rag/static/index.html)) — a single self-contained HTML file, no build step. Query box with live elapsed timer, markdown-rendered answers, verdict/score/timing chips, per-step timing table, knowledge-base stats, dataset ingestion + refresh controls, and a provider health badge (auto-refreshes every 30 s). Dark/light theme follows the OS. |
+| `/docs` | **Swagger UI** — auto-generated from the OpenAPI 3.1 spec; endpoints grouped by tag (System / Query / Data) with request/response examples. Every endpoint can be exercised directly from the browser ("Try it out"). |
+| `/redoc` | ReDoc — the same spec in reference-documentation layout. |
+| `/openapi.json` | Raw OpenAPI spec — feed it to client generators (`openapi-generator`, `orval`, Postman import). |
+
+REST endpoints:
 
 | Method | Path | Purpose |
 |---|---|---|

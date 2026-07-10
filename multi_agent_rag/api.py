@@ -25,7 +25,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from contextlib import asynccontextmanager
 
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 import config
@@ -77,25 +80,61 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Multi-Agent RAG API",
-    description="Production multi-agent RAG: QueryAnalyzer → Retriever → Analyzer → Synthesizer → Critic",
+    description=(
+        "Production multi-agent RAG: **QueryAnalyzer → Retriever → Analyzer → "
+        "Synthesizer → Critic** (LangGraph), backed by FAISS/ChromaDB and any of "
+        "four LLM providers (Anthropic, Ollama, LM Studio, OpenAI-compatible).\n\n"
+        "- Web UI at [/](/) · Swagger at [/docs](/docs) · ReDoc at [/redoc](/redoc)\n"
+        "- Long-running work (dataset ingestion, refresh) runs in the background — "
+        "poll `GET /stats` to watch it land."
+    ),
     version="2.0.0",
     lifespan=lifespan,
+    openapi_tags=[
+        {"name": "System", "description": "Health, statistics, and discovery"},
+        {"name": "Query", "description": "Run the 5-agent RAG pipeline"},
+        {"name": "Data", "description": "Ingest documents & keep the knowledge base updated"},
+    ],
 )
 
 
 # ── Schemas ──────────────────────────────────────────────────────────────────
 
 class QueryRequest(BaseModel):
-    query: str = Field(..., min_length=3, max_length=4000)
+    query: str = Field(..., min_length=3, max_length=4000,
+                       examples=["Compare FAISS and ChromaDB — when should I use each?"])
+
+
+class QueryResponse(BaseModel):
+    query: str
+    final_answer: str = Field(description="Source-grounded answer validated by the critic")
+    verdict: str = Field(description="APPROVED, or NEEDS_REVISION if the revision budget ran out")
+    score: int = Field(description="Critic quality score 1-10")
+    retrieved_count: int = Field(description="Context chunks used")
+    metrics: dict = Field(description="total_seconds, revision_cycles, per-step timings")
+
+    model_config = {"json_schema_extra": {"examples": [{
+        "query": "What are qubits?",
+        "final_answer": "Qubits are the fundamental units of quantum information...",
+        "verdict": "APPROVED",
+        "score": 9,
+        "retrieved_count": 5,
+        "metrics": {"total_seconds": 42.1, "revision_cycles": 0,
+                    "steps": {"query_analysis": 2.1, "retrieval": 1.4,
+                              "analysis": 8.7, "synthesis_iter0": 12.3,
+                              "critic_iter0": 6.2}},
+    }]}}
 
 
 class IngestTextRequest(BaseModel):
-    content: str = Field(..., min_length=20)
-    source: str = Field("api-upload", max_length=200)
+    content: str = Field(..., min_length=20,
+                         examples=["FAISS is a library for efficient similarity search..."])
+    source: str = Field("api-upload", max_length=200, examples=["my-notes"])
 
 
 class IngestDatasetRequest(BaseModel):
-    name: str = Field(..., description="Preset name — see GET /datasets")
+    name: str = Field(..., description="Preset name — see GET /datasets",
+                      examples=["wikipedia-simple"])
     max_docs: int = Field(config.DATASET_MAX_DOCS, ge=1, le=100_000)
 
 
@@ -106,7 +145,19 @@ class RefreshRequest(BaseModel):
 
 # ── Endpoints ────────────────────────────────────────────────────────────────
 
-@app.get("/health")
+_UI_PATH = Path(__file__).parent / "static" / "index.html"
+
+
+@app.get("/", include_in_schema=False)
+def ui():
+    """Simple built-in web UI (single self-contained HTML file)."""
+    if not _UI_PATH.exists():
+        raise HTTPException(status_code=404, detail="UI not found — static/index.html missing")
+    return FileResponse(_UI_PATH)
+
+
+@app.get("/health", tags=["System"], summary="Liveness + provider + index status",
+         response_description='"ok" when the LLM provider is reachable and the index is built; "degraded" otherwise')
 def health():
     provider = check_provider()
     index_ready = _manager is not None and _manager.is_ready()
@@ -118,17 +169,20 @@ def health():
     }
 
 
-@app.get("/stats")
+@app.get("/stats", tags=["System"], summary="Knowledge-base statistics")
 def stats():
     return _get_manager().stats()
 
 
-@app.get("/datasets")
+@app.get("/datasets", tags=["System"], summary="Available open-source dataset presets")
 def datasets():
     return list_presets()
 
 
-@app.post("/query")
+@app.post("/query", tags=["Query"], response_model=QueryResponse,
+          summary="Run the full 5-agent pipeline",
+          responses={502: {"description": "LLM provider failure (after retries)"},
+                     503: {"description": "Index still building — retry shortly"}})
 def query(req: QueryRequest):
     mgr = _get_manager()
     try:
@@ -138,7 +192,8 @@ def query(req: QueryRequest):
     return result
 
 
-@app.post("/ingest/text")
+@app.post("/ingest/text", tags=["Data"],
+          summary="Add a document inline (persisted + background re-index)")
 def ingest_text(req: IngestTextRequest, background: BackgroundTasks):
     # Persist as a corpus file so it survives restarts and syncs like any doc
     import hashlib
@@ -154,7 +209,9 @@ def ingest_text(req: IngestTextRequest, background: BackgroundTasks):
             "note": "index refresh scheduled" if created else "duplicate — already indexed"}
 
 
-@app.post("/ingest/dataset")
+@app.post("/ingest/dataset", tags=["Data"],
+          summary="Ingest an open-source dataset (background)",
+          responses={400: {"description": "Unknown preset name"}})
 def ingest_dataset(req: IngestDatasetRequest, background: BackgroundTasks):
     if req.name not in list_presets():
         raise HTTPException(status_code=400,
@@ -173,7 +230,8 @@ def ingest_dataset(req: IngestDatasetRequest, background: BackgroundTasks):
             "note": "ingestion + re-index running in background; watch GET /stats"}
 
 
-@app.post("/refresh")
+@app.post("/refresh", tags=["Data"],
+          summary="Re-pull datasets + incremental re-index with zero-downtime swap (background)")
 def refresh(req: RefreshRequest, background: BackgroundTasks):
     def job():
         try:

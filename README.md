@@ -8,7 +8,7 @@ A production-deployable **multi-agent Retrieval Augmented Generation** system:
 - **FAISS / ChromaDB / NumPy** vector backends
 - **Open-source datasets** — stream Wikipedia, AG News, CC-News, SQuAD, PubMed (or any Hugging Face dataset) straight into the knowledge base
 - **Regular data injection & updates** — incremental indexing with an embedding cache, cron/Docker scheduler, zero-downtime index hot-swap
-- **REST API + Docker** — FastAPI server, health checks, compose deployment
+- **Web UI + REST API + Docker** — built-in browser UI, FastAPI server with Swagger docs, health checks, compose deployment
 
 > 📖 **Full system documentation** (how every part works, ops, scaling, troubleshooting): [DOCUMENTATION.md](DOCUMENTATION.md)
 >
@@ -66,11 +66,19 @@ You can also just drop `.txt`/`.md` files into `multi_agent_rag/data/`.
 ./scripts/run.sh --backend chroma                         # persistent vector store
 ```
 
-### Production API server
+### Web UI + Production API server
 
 ```bash
-./scripts/serve.sh            # http://localhost:8000 — Swagger docs at /docs
+./scripts/serve.sh
 ```
+
+Then open:
+
+| URL | What |
+|---|---|
+| `http://localhost:8000/` | **Web UI** — ask questions, see verdict/score/timings, ingest datasets, monitor health |
+| `http://localhost:8000/docs` | **Swagger UI** — interactive API docs, try every endpoint |
+| `http://localhost:8000/redoc` | ReDoc — reference-style API docs |
 
 ```bash
 curl -s -X POST localhost:8000/query -H 'Content-Type: application/json' \
@@ -221,7 +229,8 @@ Multi_Agent_RAG/
 │   └── lib.sh                       # shared bash helpers
 └── multi_agent_rag/
     ├── main.py                      # interactive / one-shot CLI
-    ├── api.py                       # FastAPI production server
+    ├── api.py                       # FastAPI production server (UI + Swagger + REST)
+    ├── static/index.html            # built-in web UI (single file, no build step)
     ├── ingest_cli.py                # data management CLI (dataset/refresh/sync/check)
     ├── config.py                    # all configuration (env-overridable)
     ├── requirements.txt

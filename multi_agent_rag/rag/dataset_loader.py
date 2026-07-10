@@ -46,7 +46,7 @@ PRESETS: dict[str, dict] = {
         "description": "Full English Wikipedia (6M+ articles — use max_docs!)",
     },
     "ag-news": {
-        "path": "ag_news",
+        "path": "fancyzhx/ag_news",
         "config": None,
         "split": "train",
         "text_field": "text",
@@ -54,7 +54,7 @@ PRESETS: dict[str, dict] = {
         "description": "AG News — 120k news articles in 4 categories",
     },
     "cc-news": {
-        "path": "cc_news",
+        "path": "vblagoje/cc_news",
         "config": None,
         "split": "train",
         "text_field": "text",
@@ -62,7 +62,7 @@ PRESETS: dict[str, dict] = {
         "description": "CC-News — 700k+ English news articles from CommonCrawl",
     },
     "squad": {
-        "path": "squad",
+        "path": "rajpurkar/squad",
         "config": None,
         "split": "train",
         "text_field": "context",

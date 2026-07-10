@@ -177,9 +177,9 @@ Built-in dataset presets (`python ingest_cli.py list-datasets`):
 |---|---|---|
 | `wikipedia-simple` | `wikimedia/wikipedia` (20231101.simple) | ~240k clean encyclopedic articles — best default |
 | `wikipedia-en` | `wikimedia/wikipedia` (20231101.en) | Full English Wikipedia (6M+; bound with `--max-docs`) |
-| `ag-news` | `ag_news` | 120k categorized news articles |
-| `cc-news` | `cc_news` | 700k+ CommonCrawl news articles |
-| `squad` | `squad` | Wikipedia reading-comprehension paragraphs (deduplicated) |
+| `ag-news` | `fancyzhx/ag_news` | 120k categorized news articles |
+| `cc-news` | `vblagoje/cc_news` | 700k+ CommonCrawl news articles |
+| `squad` | `rajpurkar/squad` | Wikipedia reading-comprehension paragraphs (deduplicated) |
 | `pubmed-summarization` | `ccdv/pubmed-summarization` | Biomedical research articles |
 
 Any other HF dataset works generically:

@@ -115,3 +115,124 @@
 2026-07-10 15:46:20 [INFO    ] VectorRetriever           [FAISS] IndexFlatIP — 219 vectors, dim=384
 2026-07-10 15:46:20 [INFO    ] VectorRetriever           Index ready — 219 vectors in FAISS backend
 2026-07-10 15:46:20 [INFO    ] IndexManager              Sync complete: {'files': 8, 'added': 0, 'changed': 0, 'removed': 0, 'documents': 8, 'chunks': 219, 'embedded_new': 0, 'embedded_cached': 219, 'backend': 'faiss', 'seconds': 9.25}
+2026-07-10 15:46:57 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:46:57 [INFO    ] IndexManager              Sync: 8 files (0 new, 0 changed, 0 removed)
+2026-07-10 15:47:07 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:47:07 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:47:07 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/space_exploration.txt' → 28 chunks (id=362395f5b14d7cc1)
+2026-07-10 15:47:07 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/biotechnology.txt' → 28 chunks (id=c8bef7839d5234b1)
+2026-07-10 15:47:07 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/quantum_computing.txt' → 22 chunks (id=27d301c2b113a8a6)
+2026-07-10 15:47:07 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/economics_finance.txt' → 31 chunks (id=ca77ed7cb65b90f9)
+2026-07-10 15:47:07 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/climate_change.txt' → 26 chunks (id=5b9aaf67da30ea4e)
+2026-07-10 15:47:07 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/renewable_energy.txt' → 30 chunks (id=78916c31c6116f0c)
+2026-07-10 15:47:07 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/artificial_intelligence.txt' → 25 chunks (id=4140912d2aa186e4)
+2026-07-10 15:47:07 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/large_language_models.txt' → 29 chunks (id=0b92d6ec305d641a)
+2026-07-10 15:47:07 [INFO    ] Ingestion                 Ingested 8/8 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:47:07 [INFO    ] Ingestion                 Found 0 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus'
+2026-07-10 15:47:07 [INFO    ] Ingestion                 Ingested 0/0 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:47:07 [INFO    ] VectorRetriever           Using 219 precomputed embeddings (cache hit)
+2026-07-10 15:47:07 [INFO    ] VectorRetriever           [FAISS] IndexFlatIP — 219 vectors, dim=384
+2026-07-10 15:47:07 [INFO    ] VectorRetriever           Index ready — 219 vectors in FAISS backend
+2026-07-10 15:47:07 [INFO    ] IndexManager              Sync complete: {'files': 8, 'added': 0, 'changed': 0, 'removed': 0, 'documents': 8, 'chunks': 219, 'embedded_new': 0, 'embedded_cached': 219, 'backend': 'faiss', 'seconds': 10.5}
+2026-07-10 15:47:22 [INFO    ] DatasetLoader             Streaming dataset ag_news (config=None split=train) → /Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news (max_docs=20)
+2026-07-10 15:47:25 [WARNING ] DatasetLoader             Dataset load failed (attempt 1/3): Invalid HF URI 'hf://datasets/ag_news@eb185aade064a813bc0b7f42de02595523103ca4/.huggingface.yaml'. Repository id must be 'namespace/name', got 'ag_news'. — retrying...
+2026-07-10 15:47:30 [WARNING ] DatasetLoader             Dataset load failed (attempt 2/3): Invalid HF URI 'hf://datasets/ag_news@eb185aade064a813bc0b7f42de02595523103ca4/.huggingface.yaml'. Repository id must be 'namespace/name', got 'ag_news'. — retrying...
+2026-07-10 15:47:39 [ERROR   ] IngestCLI                 Command failed: Failed to open dataset 'ag_news': Invalid HF URI 'hf://datasets/ag_news@eb185aade064a813bc0b7f42de02595523103ca4/.huggingface.yaml'. Repository id must be 'namespace/name', got 'ag_news'.
+2026-07-10 15:47:53 [INFO    ] DatasetLoader             Streaming dataset ag_news (config=None split=train) → /Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news (max_docs=20)
+2026-07-10 15:47:56 [WARNING ] DatasetLoader             Dataset load failed (attempt 1/3): Invalid HF URI 'hf://datasets/ag_news@eb185aade064a813bc0b7f42de02595523103ca4/.huggingface.yaml'. Repository id must be 'namespace/name', got 'ag_news'. — retrying...
+2026-07-10 15:48:01 [WARNING ] DatasetLoader             Dataset load failed (attempt 2/3): Invalid HF URI 'hf://datasets/ag_news@eb185aade064a813bc0b7f42de02595523103ca4/.huggingface.yaml'. Repository id must be 'namespace/name', got 'ag_news'. — retrying...
+2026-07-10 15:48:10 [ERROR   ] IngestCLI                 Command failed: Failed to open dataset 'ag_news': Invalid HF URI 'hf://datasets/ag_news@eb185aade064a813bc0b7f42de02595523103ca4/.huggingface.yaml'. Repository id must be 'namespace/name', got 'ag_news'.
+2026-07-10 15:48:26 [INFO    ] DatasetLoader             Streaming dataset fancyzhx/ag_news (config=None split=train) → /Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news (max_docs=20)
+2026-07-10 15:48:53 [INFO    ] DatasetLoader             Dataset ingestion done: {'dataset': 'fancyzhx/ag_news', 'corpus_dir': '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news', 'written': 20, 'skipped_existing': 0, 'errors': 0}
+2026-07-10 15:49:33 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:49:33 [INFO    ] IndexManager              Sync: 28 files (20 new, 0 changed, 0 removed)
+2026-07-10 15:49:43 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:49:43 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/space_exploration.txt' → 28 chunks (id=362395f5b14d7cc1)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/biotechnology.txt' → 28 chunks (id=c8bef7839d5234b1)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/quantum_computing.txt' → 22 chunks (id=27d301c2b113a8a6)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/economics_finance.txt' → 31 chunks (id=ca77ed7cb65b90f9)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/climate_change.txt' → 26 chunks (id=5b9aaf67da30ea4e)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/renewable_energy.txt' → 30 chunks (id=78916c31c6116f0c)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/artificial_intelligence.txt' → 25 chunks (id=4140912d2aa186e4)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/large_language_models.txt' → 29 chunks (id=0b92d6ec305d641a)
+2026-07-10 15:49:43 [INFO    ] Ingestion                 Ingested 8/8 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:49:43 [INFO    ] Ingestion                 Found 20 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus'
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9a27ef6e796bb726.txt' → 1 chunks (id=cb9e07c2d9ec10ee)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9422a09153657d08.txt' → 1 chunks (id=b7674e05e1b36cd0)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9cbedebd0a008800.txt' → 1 chunks (id=0c84d2917febd20d)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/80cb8e408bf03b6b.txt' → 1 chunks (id=ae1e352b4332fe1c)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9997cc38561c4ec0.txt' → 1 chunks (id=67d2aa4c9f2ec636)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/ec7382cd72944eb2.txt' → 1 chunks (id=ae6a39ce741ac678)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/193c371ab5b9f5fd.txt' → 1 chunks (id=8c881ff00817bec7)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/02b4ef5417d2edfd.txt' → 1 chunks (id=31e3a5304ed186c2)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/76d43e1d93db1aa2.txt' → 1 chunks (id=24d8a6505881580e)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9101593838ba112a.txt' → 1 chunks (id=1921443401e34be8)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/f620ccf7b87796bc.txt' → 1 chunks (id=31697f4afe7c15f9)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/ae68cf8739391644.txt' → 1 chunks (id=f0be585638e6c134)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/82685db2ac6cedce.txt' → 1 chunks (id=a3f6e8b98ff653c7)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/279ea9c67d14e9f4.txt' → 1 chunks (id=aae6a5aa85b77364)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/7002f1da7cecec15.txt' → 1 chunks (id=35224ff28f660604)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/193cd960fff0121f.txt' → 1 chunks (id=90dcce2aedd1acfa)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/8458cb43db1d47f2.txt' → 1 chunks (id=809b3e71c818aac9)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/ac5c2e49a5d545ff.txt' → 1 chunks (id=fc50028f1574081d)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/04d2b52970292e3a.txt' → 1 chunks (id=0c7459d6e2950bbd)
+2026-07-10 15:49:43 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/29548d3effef818c.txt' → 1 chunks (id=2ee9433cbcb6f7cc)
+2026-07-10 15:49:43 [INFO    ] Ingestion                 Ingested 20/20 files → {'documents': 28, 'chunks': 239}
+2026-07-10 15:49:43 [INFO    ] IndexManager              Embedding 20 new chunks (219 cached)...
+2026-07-10 15:49:43 [INFO    ] VectorRetriever           Using 239 precomputed embeddings (cache hit)
+2026-07-10 15:49:43 [INFO    ] VectorRetriever           [FAISS] IndexFlatIP — 239 vectors, dim=384
+2026-07-10 15:49:43 [INFO    ] VectorRetriever           Index ready — 239 vectors in FAISS backend
+2026-07-10 15:49:43 [INFO    ] IndexManager              Sync complete: {'files': 28, 'added': 20, 'changed': 0, 'removed': 0, 'documents': 28, 'chunks': 239, 'embedded_new': 20, 'embedded_cached': 219, 'backend': 'faiss', 'seconds': 9.7}
+2026-07-10 15:49:46 [INFO    ] DatasetLoader             Streaming dataset fancyzhx/ag_news (config=None split=train) → /Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news (max_docs=20)
+2026-07-10 15:50:11 [INFO    ] DatasetLoader             Dataset ingestion done: {'dataset': 'fancyzhx/ag_news', 'corpus_dir': '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news', 'written': 0, 'skipped_existing': 20, 'errors': 0}
+2026-07-10 15:51:03 [INFO    ] LLM                       LLM provider ready: ollama (model=gemma4:e2b)
+2026-07-10 15:51:13 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:51:13 [INFO    ] IndexManager              Sync: 28 files (0 new, 0 changed, 0 removed)
+2026-07-10 15:51:24 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:51:24 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/space_exploration.txt' → 28 chunks (id=362395f5b14d7cc1)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/biotechnology.txt' → 28 chunks (id=c8bef7839d5234b1)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/quantum_computing.txt' → 22 chunks (id=27d301c2b113a8a6)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/economics_finance.txt' → 31 chunks (id=ca77ed7cb65b90f9)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/climate_change.txt' → 26 chunks (id=5b9aaf67da30ea4e)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/renewable_energy.txt' → 30 chunks (id=78916c31c6116f0c)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/artificial_intelligence.txt' → 25 chunks (id=4140912d2aa186e4)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/large_language_models.txt' → 29 chunks (id=0b92d6ec305d641a)
+2026-07-10 15:51:24 [INFO    ] Ingestion                 Ingested 8/8 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:51:24 [INFO    ] Ingestion                 Found 20 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus'
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9a27ef6e796bb726.txt' → 1 chunks (id=cb9e07c2d9ec10ee)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9422a09153657d08.txt' → 1 chunks (id=b7674e05e1b36cd0)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9cbedebd0a008800.txt' → 1 chunks (id=0c84d2917febd20d)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/80cb8e408bf03b6b.txt' → 1 chunks (id=ae1e352b4332fe1c)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9997cc38561c4ec0.txt' → 1 chunks (id=67d2aa4c9f2ec636)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/ec7382cd72944eb2.txt' → 1 chunks (id=ae6a39ce741ac678)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/193c371ab5b9f5fd.txt' → 1 chunks (id=8c881ff00817bec7)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/02b4ef5417d2edfd.txt' → 1 chunks (id=31e3a5304ed186c2)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/76d43e1d93db1aa2.txt' → 1 chunks (id=24d8a6505881580e)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/9101593838ba112a.txt' → 1 chunks (id=1921443401e34be8)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/f620ccf7b87796bc.txt' → 1 chunks (id=31697f4afe7c15f9)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/ae68cf8739391644.txt' → 1 chunks (id=f0be585638e6c134)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/82685db2ac6cedce.txt' → 1 chunks (id=a3f6e8b98ff653c7)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/279ea9c67d14e9f4.txt' → 1 chunks (id=aae6a5aa85b77364)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/7002f1da7cecec15.txt' → 1 chunks (id=35224ff28f660604)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/193cd960fff0121f.txt' → 1 chunks (id=90dcce2aedd1acfa)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/8458cb43db1d47f2.txt' → 1 chunks (id=809b3e71c818aac9)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/ac5c2e49a5d545ff.txt' → 1 chunks (id=fc50028f1574081d)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/04d2b52970292e3a.txt' → 1 chunks (id=0c7459d6e2950bbd)
+2026-07-10 15:51:24 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus/ag-news/29548d3effef818c.txt' → 1 chunks (id=2ee9433cbcb6f7cc)
+2026-07-10 15:51:24 [INFO    ] Ingestion                 Ingested 20/20 files → {'documents': 28, 'chunks': 239}
+2026-07-10 15:51:24 [INFO    ] VectorRetriever           Using 239 precomputed embeddings (cache hit)
+2026-07-10 15:51:24 [INFO    ] VectorRetriever           [FAISS] IndexFlatIP — 239 vectors, dim=384
+2026-07-10 15:51:24 [INFO    ] VectorRetriever           Index ready — 239 vectors in FAISS backend
+2026-07-10 15:51:24 [INFO    ] IndexManager              Sync complete: {'files': 28, 'added': 0, 'changed': 0, 'removed': 0, 'documents': 28, 'chunks': 239, 'embedded_new': 0, 'embedded_cached': 239, 'backend': 'faiss', 'seconds': 10.52}
+2026-07-10 15:51:24 [INFO    ] PipelineGraph             ============================================================
+2026-07-10 15:51:24 [INFO    ] PipelineGraph             Pipeline START — query: What are qubits and how do they differ from classical bits?
+2026-07-10 15:51:24 [INFO    ] QueryAnalyzer             Analysing query: What are qubits and how do they differ from classical bits?
+2026-07-10 15:51:41 [INFO    ] QueryAnalyzer             Intent=comparative | queries=3 | concepts=['qubits', 'classical bits', 'superposition', 'quantum computing', 'information theory']
+2026-07-10 15:51:42 [INFO    ] RetrieverAgent            Retrieved 7 unique chunks for query
+2026-07-10 15:51:57 [INFO    ] AnalyzerAgent             Analysing 7 chunks for query
+2026-07-10 15:52:17 [INFO    ] SynthesizerAgent          Synthesising answer
+2026-07-10 15:52:33 [INFO    ] CriticAgent               Reviewing draft answer
+2026-07-10 15:52:56 [INFO    ] CriticAgent               Critic verdict=APPROVED score=10/10
+2026-07-10 15:52:56 [INFO    ] PipelineGraph             Pipeline END — verdict=APPROVED score=10/10 time=91.9s revisions=0

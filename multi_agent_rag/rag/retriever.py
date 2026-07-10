@@ -30,14 +30,21 @@ class VectorRetriever:
 
     # ── Public API ─────────────────────────────────────────────────────────
 
-    def build_index(self):
+    def build_index(self, embeddings: np.ndarray | None = None):
+        """Build the vector index. If `embeddings` is provided (one row per
+        chunk, e.g. from IndexManager's embedding cache) the expensive
+        encode step is skipped entirely."""
         chunks = self.store.all_chunks()
         if not chunks:
             log.warning("No chunks to index — did you ingest documents?")
             return
-        log.info("Embedding %d chunks...", len(chunks))
-        texts = [c.content for c in chunks]
-        embs = self.model.encode(texts, show_progress_bar=True, convert_to_numpy=True, batch_size=64)
+        if embeddings is not None and len(embeddings) == len(chunks):
+            embs = np.asarray(embeddings)
+            log.info("Using %d precomputed embeddings (cache hit)", len(chunks))
+        else:
+            log.info("Embedding %d chunks...", len(chunks))
+            texts = [c.content for c in chunks]
+            embs = self.model.encode(texts, show_progress_bar=True, convert_to_numpy=True, batch_size=64)
 
         if self.backend == "numpy":
             self._build_numpy(chunks, embs)

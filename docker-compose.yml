@@ -1,0 +1,71 @@
+# ── Multi-Agent RAG deployment ──────────────────────────────────────────────
+# Default (cloud LLM):        docker compose up -d
+# With local Ollama LLM:      docker compose --profile ollama up -d
+#                             docker compose exec ollama ollama pull llama3.1:8b
+# With scheduled data updates docker compose --profile scheduler up -d
+
+services:
+  rag-api:
+    build: .
+    container_name: rag-api
+    ports:
+      - "${API_PORT:-8000}:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Inside compose, Ollama is reachable by service name, not localhost
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL_DOCKER:-http://ollama:11434/v1}
+    volumes:
+      - rag_corpus:/app/multi_agent_rag/corpus
+      - rag_index:/app/multi_agent_rag/index_state
+      - rag_chroma:/app/multi_agent_rag/chroma_db
+      - rag_logs:/app/multi_agent_rag/logs
+      - ./multi_agent_rag/data:/app/multi_agent_rag/data:ro
+    restart: unless-stopped
+
+  # ── Local open-source LLM (optional) ──────────────────────────────────────
+  ollama:
+    image: ollama/ollama:latest
+    container_name: rag-ollama
+    profiles: ["ollama"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    restart: unless-stopped
+
+  # ── Regular data injection & update (optional) ─────────────────────────────
+  # Re-pulls ingested datasets and refreshes the API index every UPDATE_INTERVAL.
+  data-updater:
+    build: .
+    container_name: rag-updater
+    profiles: ["scheduler"]
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      RAG_API_URL: http://rag-api:8000
+    volumes:
+      - rag_corpus:/app/multi_agent_rag/corpus
+      - rag_index:/app/multi_agent_rag/index_state
+      - rag_logs:/app/multi_agent_rag/logs
+    depends_on:
+      - rag-api
+    entrypoint: >
+      sh -c 'while true; do
+               echo "[updater] $(date) refreshing datasets...";
+               python ingest_cli.py refresh --no-sync || echo "[updater] refresh failed";
+               curl -fsS -X POST http://rag-api:8000/refresh
+                    -H "Content-Type: application/json"
+                    -d "{\"pull_datasets\": false}" || echo "[updater] API notify failed";
+               sleep ${UPDATE_INTERVAL:-3600};
+             done'
+    restart: unless-stopped
+
+volumes:
+  rag_corpus:
+  rag_index:
+  rag_chroma:
+  rag_logs:
+  ollama_models:

@@ -111,7 +111,8 @@ class DocumentStore:
                     },
                 ))
                 idx += 1
-            start = end - CHUNK_OVERLAP
-            if start >= len(text):
+            if end >= len(text):
                 break
+            # Overlap must still advance the window, or the tail chunk loops forever
+            start = max(end - CHUNK_OVERLAP, start + 1)
         return chunks

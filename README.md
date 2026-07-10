@@ -1,12 +1,114 @@
 # Production Multi-Agent RAG System
 
-A production-grade **Retrieval Augmented Generation (RAG)** system built with:
+A production-deployable **multi-agent Retrieval Augmented Generation** system:
 
-- **LangGraph** — stateful, cyclic agent orchestration (with automatic revision loop)
-- **FAISS** — fast in-memory vector search (exact cosine via IndexFlatIP)
-- **ChromaDB** — persistent disk-backed vector store (HNSW approximate nearest-neighbor)
-- **Claude Opus 4.8** — all agents use adaptive thinking for best reasoning quality
-- **5 specialized agents** — each with a distinct responsibility, passing structured data through a typed state graph
+- **LangGraph** — stateful, cyclic agent orchestration (automatic revision loop)
+- **5 specialized agents** — QueryAnalyzer → Retriever → Analyzer → Synthesizer → Critic
+- **4 LLM providers, one env var** — Anthropic **Claude**, local **Ollama**, local **LM Studio**, or any OpenAI-compatible endpoint (vLLM, Groq, Together, …)
+- **FAISS / ChromaDB / NumPy** vector backends
+- **Open-source datasets** — stream Wikipedia, AG News, CC-News, SQuAD, PubMed (or any Hugging Face dataset) straight into the knowledge base
+- **Regular data injection & updates** — incremental indexing with an embedding cache, cron/Docker scheduler, zero-downtime index hot-swap
+- **REST API + Docker** — FastAPI server, health checks, compose deployment
+
+> 📖 **Full system documentation** (how every part works, ops, scaling, troubleshooting): [DOCUMENTATION.md](DOCUMENTATION.md)
+>
+> Reference articles: [Production Multi-Agent RAG](https://sabbirahmedsaqlain.github.io/articles/production-multi-agent-rag/) · [Embeddings in RAG](https://sabbirahmedsaqlain.github.io/articles/embeddings-in-rag-complete-practical-guide/) · [Vector Databases](https://sabbirahmedsaqlain.github.io/articles/vector-database/) · [LangChain & LangGraph](https://sabbirahmedsaqlain.github.io/articles/langchain-langgraph/) · [RAG Evaluation](https://sabbirahmedsaqlain.github.io/articles/rag-performance-evaluation-guide/)
+
+---
+
+## Quick Start (3 commands)
+
+```bash
+./scripts/setup.sh          # venv + dependencies + .env template + provider check
+# edit .env → pick your LLM provider (see below)
+./scripts/run.sh            # interactive CLI on the bundled sample data
+```
+
+Everything also works via `make`: `make setup`, `make run`, `make serve`, `make ingest`, `make update`, `make check`, `make docker`.
+
+### Choosing an LLM provider
+
+Set `LLM_PROVIDER` in `.env` — nothing else changes:
+
+| Provider | Setup | `.env` |
+|---|---|---|
+| **Claude (Anthropic)** — best quality | get an API key | `LLM_PROVIDER=anthropic`, `ANTHROPIC_API_KEY=sk-ant-...` |
+| **Ollama** — free, local, open-source | [install](https://ollama.com), `ollama pull llama3.1:8b` | `LLM_PROVIDER=ollama`, `OLLAMA_MODEL=llama3.1:8b` |
+| **LM Studio** — free, local, GUI | [install](https://lmstudio.ai), load a model, enable *Local Server* | `LLM_PROVIDER=lmstudio` (model auto-detected) |
+| **Any OpenAI-compatible** — vLLM, llama.cpp, Groq, Together, OpenAI | have the endpoint URL + key | `LLM_PROVIDER=openai`, `OPENAI_BASE_URL=...`, `OPENAI_MODEL=...` |
+
+Verify your setup any time:
+
+```bash
+./scripts/check.sh           # probes Ollama/LM Studio, checks provider + index
+```
+
+### Loading open-source data
+
+```bash
+./scripts/ingest.sh list                                   # show dataset presets
+./scripts/ingest.sh --name wikipedia-simple --max-docs 500 # Simple-English Wikipedia
+./scripts/ingest.sh --name ag-news --max-docs 200          # news articles
+# any Hugging Face dataset:
+./scripts/ingest.sh --hf-path cnn_dailymail --hf-config 3.0.0 --text-field article
+```
+
+Datasets are streamed (never fully downloaded), deduplicated, and materialised as
+files under `multi_agent_rag/corpus/` — re-running only adds *new* records.
+You can also just drop `.txt`/`.md` files into `multi_agent_rag/data/`.
+
+### Running queries
+
+```bash
+./scripts/run.sh                                          # interactive menu
+./scripts/run.sh --query "How does CRISPR work?"          # one-shot
+./scripts/run.sh --dataset squad --max-docs 300           # ingest then run
+./scripts/run.sh --backend chroma                         # persistent vector store
+```
+
+### Production API server
+
+```bash
+./scripts/serve.sh            # http://localhost:8000 — Swagger docs at /docs
+```
+
+```bash
+curl -s -X POST localhost:8000/query -H 'Content-Type: application/json' \
+     -d '{"query": "Compare FAISS and ChromaDB"}' | jq -r .final_answer
+
+curl -s localhost:8000/health          # provider + index status
+curl -s -X POST localhost:8000/ingest/dataset -H 'Content-Type: application/json' \
+     -d '{"name": "ag-news", "max_docs": 200}'      # background ingest + re-index
+```
+
+### Docker deployment
+
+```bash
+cp .env.example .env   # configure provider
+docker compose up -d --build                     # API only
+docker compose --profile ollama up -d --build    # + local open-source LLM
+docker compose exec ollama ollama pull llama3.1:8b
+docker compose --profile scheduler up -d         # + hourly automatic data updates
+```
+
+### Regular data updates
+
+The knowledge base stays fresh through a **pull → incremental sync → hot-swap** loop
+(only new documents get embedded, thanks to a per-chunk embedding cache; a running
+API swaps its index atomically with zero downtime):
+
+```bash
+./scripts/update_data.sh      # one manual update (lock-protected, cron-safe)
+
+# hourly via cron:
+# 0 * * * * /path/to/repo/scripts/update_data.sh >> /path/to/repo/multi_agent_rag/logs/update.log 2>&1
+
+# or in Docker: the --profile scheduler service does this automatically
+# or on demand against a running API:
+curl -X POST localhost:8000/refresh -H 'Content-Type: application/json' -d '{}'
+```
+
+Details in [DOCUMENTATION.md §4.5](DOCUMENTATION.md).
 
 ---
 
@@ -28,6 +130,9 @@ A production-grade **Retrieval Augmented Generation (RAG)** system built with:
                         │      │                                   │
                         │      └── APPROVED ──► Final Answer       │
                         └─────────────────────────────────────────┘
+                                          │
+                        every agent calls llm.chat() — provider-agnostic:
+                        anthropic │ ollama │ lmstudio │ openai-compatible
 ```
 
 ### Why LangGraph?
@@ -52,50 +157,10 @@ Text: "FAISS enables fast nearest-neighbor search"
 Vector: [0.21, -0.09, 0.84, 0.13, ...]   ← 384 numbers representing meaning
 ```
 
-At query time:
-```
-"How to search embeddings quickly?"
-         │
-         ▼  (same embedding model)
-[0.19, -0.11, 0.81, ...]                  ← query vector
+At query time the query is embedded with the same model and compared by cosine
+similarity against all stored vectors; the most similar chunks are fed to the LLM
+as context.
 
-         │  cosine similarity comparison against all stored vectors
-         ▼
-Most similar chunks returned → fed to the LLM as context
-```
-
-### How Data is Stored in This System
-
-```
-Raw Text File
-    │
-    ▼
- 
-Ingestion Pipeline (cleaning, chunking with overlap)
-    │
-    ├── Chunk 0: "FAISS is a library by Meta..."
-    ├── Chunk 1: "...uses IVF and HNSW indices..."
-    └── Chunk 2: "...exact vs approximate search..."
-         │
-         ▼
-SentenceTransformer ("all-MiniLM-L6-v2")
-         │
-         ▼
-┌─── FAISS Backend ──────────────────────────────┐
-│  IndexFlatIP (Inner Product on unit vectors)   │
-│  All vectors stored in RAM                     │
-│  Exact cosine similarity search                │
-│  ~1ms search over 100K vectors                 │
-└────────────────────────────────────────────────┘
-
-┌─── ChromaDB Backend ───────────────────────────┐
-│  HNSW (Hierarchical Navigable Small World)     │
-│  Vectors persisted to disk (./chroma_db/)      │
-│  Approximate nearest-neighbor search           │
-│  Survives process restarts                     │
-└────────────────────────────────────────────────┘
- ```
- 
 ### FAISS vs ChromaDB vs NumPy
 
 | | **NumPy** | **FAISS** | **ChromaDB** |
@@ -103,261 +168,149 @@ SentenceTransformer ("all-MiniLM-L6-v2")
 | Storage | RAM | RAM | Disk (persistent) |
 | Search type | Brute-force exact | Exact (IndexFlatIP) | Approximate (HNSW) |
 | Scale | ~10K chunks | Millions | Millions |
-| Persistence | ❌ Lost on restart | ❌ Lost on restart | ✅ Survives restart |
-| Setup | Zero | `faiss-cpu` | `chromadb` |
-| Speed (1M vectors) | Seconds | Milliseconds | Milliseconds |
+| Persistence | ❌ Lost on restart | ❌ (fast rebuild from embedding cache) | ✅ Survives restart |
 | **When to use** | Prototyping | Production in-memory | Production persistent |
 
-**This system uses FAISS by default** (fast, exact, production-grade). Switch to ChromaDB with `VECTOR_BACKEND=chroma`.
+**This system uses FAISS by default.** Switch with `VECTOR_BACKEND=chroma`.
 
 ---
 
 ## The 5 Agents
 
 ### 1. QueryAnalyzerAgent
-Analyses the user query before retrieval to improve search quality.
-
-**Output:**
-```json
-{
-  "intent": "comparative",
-  "search_queries": [
-    "FAISS vector database performance",
-    "ChromaDB persistent vector store",
-    "approximate vs exact nearest neighbor search"
-  ],
-  "key_concepts": ["FAISS", "ChromaDB", "vector database"],
-  "requires_detail": true
-}
-```
-Multiple rephrasings are retrieved independently, then deduplicated — dramatically improving recall for ambiguous queries.
+Analyses the user query before retrieval: intent classification plus 2–3 diverse
+**query rephrasings** (multi-query expansion). Each rephrasing is retrieved
+independently, then deduplicated — dramatically improving recall for ambiguous queries.
 
 ### 2. RetrieverAgent
-Executes vector search for each rephrased query using FAISS/ChromaDB, deduplicates results, applies a score threshold, and runs an LLM-based relevance filtering pass.
+Executes vector search for each rephrased query, deduplicates results, applies a
+score threshold, and runs an LLM-based relevance filtering pass.
 
 ### 3. AnalyzerAgent
-Deep-reads the retrieved chunks to extract:
-- Key facts with source attribution
-- Supporting evidence (direct quotes)
-- Contradictions between sources
-- Information gaps (what the query asks but sources don't answer)
+Deep-reads the retrieved chunks to extract key facts with source attribution,
+supporting quotes, contradictions between sources, and information gaps.
 
 ### 4. SynthesizerAgent
-Writes a well-structured, source-grounded answer. On revision cycles, applies the critic's specific feedback to improve the draft.
+Writes a well-structured, source-grounded answer. On revision cycles, applies the
+critic's specific feedback to improve the draft.
 
 ### 5. CriticAgent
-Evaluates the draft on five dimensions: accuracy, completeness, clarity, citations, conciseness. Produces a VERDICT (APPROVED / NEEDS_REVISION) with a score out of 10. If revision is needed and the iteration limit hasn't been reached, the graph loops back to the synthesizer.
+Evaluates the draft on accuracy, completeness, clarity, citations, and conciseness.
+Produces a VERDICT (APPROVED / NEEDS_REVISION) with a score out of 10. On
+NEEDS_REVISION the graph loops back to the synthesizer, up to `MAX_REVISION_CYCLES`.
 
 ---
 
 ## Project Structure
 
 ```
-MultiAgent/
-├── README.md
+Multi_Agent_RAG/
+├── README.md                        # this file — how to run
+├── DOCUMENTATION.md                 # full system documentation
+├── Makefile                         # make setup / run / serve / ingest / update / docker
+├── Dockerfile                       # production image (healthcheck, non-root, prebaked model)
+├── docker-compose.yml               # api + optional ollama + optional data-updater
+├── .env.example                     # annotated config template → copy to .env
+├── scripts/
+│   ├── setup.sh                     # one-time setup (idempotent, error-handled)
+│   ├── run.sh                       # CLI runner
+│   ├── serve.sh                     # API server (uvicorn)
+│   ├── ingest.sh                    # open-source dataset ingestion
+│   ├── update_data.sh               # cron-safe regular data update job
+│   ├── check.sh                     # provider + index health check
+│   └── lib.sh                       # shared bash helpers
 └── multi_agent_rag/
-    ├── main.py                      # Interactive CLI demo
-    ├── config.py                    # All configuration in one place
+    ├── main.py                      # interactive / one-shot CLI
+    ├── api.py                       # FastAPI production server
+    ├── ingest_cli.py                # data management CLI (dataset/refresh/sync/check)
+    ├── config.py                    # all configuration (env-overridable)
     ├── requirements.txt
+    ├── llm/
+    │   └── providers.py             # anthropic / ollama / lmstudio / openai-compatible + retries
     ├── agents/
-    │   ├── __init__.py
-    │   ├── base_agent.py            # Claude client, streaming, logging
+    │   ├── base_agent.py            # provider-agnostic LLM access
     │   ├── graph.py                 # LangGraph state machine & routing
-    │   ├── query_analyzer.py        # Query intent + multi-query expansion
-    │   ├── retriever_agent.py       # Multi-query retrieval + dedup
-    │   ├── analyzer_agent.py        # Fact extraction & gap analysis
-    │   ├── synthesizer_agent.py     # Answer composition & revision
-    │   └── critic_agent.py          # Quality scoring & validation
+    │   ├── query_analyzer.py        # intent + multi-query expansion
+    │   ├── retriever_agent.py       # multi-query retrieval + dedup
+    │   ├── analyzer_agent.py        # fact extraction & gap analysis
+    │   ├── synthesizer_agent.py     # answer composition & revision
+    │   └── critic_agent.py          # quality scoring & validation
     ├── rag/
-    │   ├── __init__.py
-    │   ├── document_store.py        # Document + chunk storage
-    │   ├── ingestion.py             # File loading, cleaning, chunking
+    │   ├── document_store.py        # documents + sentence-aware chunking
+    │   ├── ingestion.py             # file loading & cleaning
+    │   ├── dataset_loader.py        # Hugging Face open-source datasets → corpus/
+    │   ├── index_manager.py         # incremental sync, manifest, embedding cache
     │   └── retriever.py             # FAISS / ChromaDB / NumPy backends
-    ├── utils/
-    │   ├── logger.py                # Structured logging (file + console)
-    │   └── metrics.py               # Per-step timing & revision tracking
-    ├── data/                        # Knowledge base documents
-    │   ├── artificial_intelligence.txt
-    │   ├── large_language_models.txt
-    │   ├── quantum_computing.txt
-    │   ├── renewable_energy.txt
-    │   ├── climate_change.txt
-    │   ├── biotechnology.txt
-    │   ├── space_exploration.txt
-    │   └── economics_finance.txt
-    ├── logs/                        # Auto-created: rag_system.log
-    └── chroma_db/                   # Auto-created if using ChromaDB backend
+    ├── utils/                       # logging + per-step metrics
+    ├── data/                        # hand-curated knowledge base (8 sample topics)
+    ├── corpus/                      # auto: materialised dataset documents
+    ├── index_state/                 # auto: manifest.json + embeddings.npz cache
+    ├── logs/                        # auto: rag_system.log
+    └── chroma_db/                   # auto: if VECTOR_BACKEND=chroma
 ```
 
 ---
 
-## Setup & Installation
-
-### Prerequisites
-- Python 3.11+
-- Anthropic API key
-
-### Install
-
-```bash
-cd MultiAgent
-python -m venv venv
-source venv/bin/activate          # Windows: venv\Scripts\activate
-pip install -r multi_agent_rag/requirements.txt
-```
-
-### Configure
-
-```bash
-export ANTHROPIC_API_KEY="sk-ant-..."
-
-# Optional: choose vector backend (default: faiss)
-export VECTOR_BACKEND=faiss       # faiss | chroma | numpy
-
-# Optional: log verbosity
-export LOG_LEVEL=INFO             # DEBUG | INFO | WARNING
-```
-
-### Run
-
-```bash
-cd multi_agent_rag
-python main.py
-```
-
----
-
-## Usage
-
-### Interactive CLI
-
-```
-$ python main.py
-
-  Production Multi-Agent RAG System  (LangGraph + FAISS + Claude)
-
-  [1] How does RAG work and what makes it better than a plain LLM?
-  [2] What are the main differences between CRISPR base editing and prime editing?
-  [3] Compare FAISS and ChromaDB — when should I use each?
-  ...
-  [0] Enter your own query
-
-Select query: 1
-```
-
-### Programmatic API
+## Programmatic API
 
 ```python
 import sys; sys.path.insert(0, "multi_agent_rag")
-from rag import DocumentStore, Ingestion, VectorRetriever
+from rag import IndexManager
 from agents import run_pipeline
 
-# 1. Build knowledge base
-store = DocumentStore()
-ingestion = Ingestion(store)
-ingestion.ingest_directory("./data")          # or any directory
-# ingestion.ingest_texts([{"content": "...", "source": "doc1"}])
+manager = IndexManager()          # backend="faiss" | "chroma" | "numpy"
+manager.sync()                    # incremental: only new chunks get embedded
 
-# 2. Build vector index
-retriever = VectorRetriever(store, backend="faiss")
-retriever.build_index()
-
-# 3. Run the full multi-agent pipeline
-result = run_pipeline("How does CRISPR work?", retriever)
-
+result = run_pipeline("How does CRISPR work?", manager.retriever)
 print(result["final_answer"])
-print(f"Score: {result['score']}/10")
-print(f"Time: {result['metrics']['total_seconds']}s")
-print(f"Revisions: {result['metrics']['revision_cycles']}")
+print(f"Score: {result['score']}/10  Verdict: {result['verdict']}")
+print(f"Time: {result['metrics']['total_seconds']}s  "
+      f"Revisions: {result['metrics']['revision_cycles']}")
 ```
 
-### Result Object
+Ingest an open-source dataset programmatically:
 
 ```python
-{
-  "query": "How does CRISPR work?",
-  "final_answer": "...",          # final validated answer text
-  "verdict": "APPROVED",          # or "NEEDS_REVISION" (if max cycles reached)
-  "score": 9,                     # critic score 1-10
-  "retrieved_count": 5,           # chunks used as context
-  "metrics": {
-    "total_seconds": 42.1,
-    "revision_cycles": 1,
-    "steps": {
-      "query_analysis": 2.1,
-      "retrieval": 1.4,
-      "analysis": 8.7,
-      "synthesis_iter0": 12.3,
-      "critic_iter0": 6.2,
-      "synthesis_iter1": 9.8,    # only if revision occurred
-      "critic_iter1": 5.9
-    }
-  }
-}
+from rag.dataset_loader import load_preset, load_hf_dataset
+load_preset("wikipedia-simple", max_docs=500)
+load_hf_dataset(path="cnn_dailymail", config_name="3.0.0",
+                text_field="article", max_docs=300)
+manager.sync()                    # picks up the new documents
 ```
 
 ---
 
-## Configuration Reference
+## Configuration
 
-`multi_agent_rag/config.py`:
+Everything is set via `.env` (see [.env.example](.env.example)) or environment
+variables. The most important ones:
 
 | Variable | Default | Description |
 |---|---|---|
-| `CLAUDE_MODEL` | `claude-opus-4-8` | Model for all agents |
+| `LLM_PROVIDER` | `anthropic` | `anthropic` \| `ollama` \| `lmstudio` \| `openai` |
+| `CLAUDE_MODEL` | `claude-opus-4-8` | model when using Anthropic |
+| `OLLAMA_MODEL` | `llama3.1:8b` | model when using Ollama |
 | `VECTOR_BACKEND` | `faiss` | `faiss` \| `chroma` \| `numpy` |
 | `EMBEDDING_MODEL` | `all-MiniLM-L6-v2` | SentenceTransformer model |
-| `CHUNK_SIZE` | `600` | Characters per chunk |
-| `CHUNK_OVERLAP` | `80` | Overlap between adjacent chunks |
-| `TOP_K_RETRIEVE` | `8` | Chunks retrieved before filtering |
-| `TOP_K_FINAL` | `5` | Chunks kept after score threshold |
-| `SCORE_THRESHOLD` | `0.25` | Min cosine similarity to keep |
-| `MAX_REVISION_CYCLES` | `2` | Max critic→synthesizer iterations |
-| `MAX_TOKENS` | `8192` | Token budget per agent call |
+| `CHUNK_SIZE` / `CHUNK_OVERLAP` | `600` / `80` | chunking parameters |
+| `TOP_K_RETRIEVE` / `TOP_K_FINAL` | `8` / `5` | retrieval depth |
+| `MAX_REVISION_CYCLES` | `2` | critic → synthesizer loop bound |
+| `DATASET_MAX_DOCS` | `500` | default cap for dataset ingestion |
+| `LLM_MAX_RETRIES` / `LLM_TIMEOUT` | `3` / `300` | resilience settings |
 
----
-
-## How the Revision Loop Works
-
-```
-Synthesizer produces draft
-         │
-         ▼
-    CriticAgent
-         │
-    ┌────┴─────────────────────────────────┐
-    │                                      │
- VERDICT: NEEDS_REVISION            VERDICT: APPROVED
- iteration < MAX_REVISION_CYCLES          │
-    │                                     ▼
-    │                              Return final answer
-    ▼
-SynthesizerAgent (revision mode)
-  ← receives critic's REVISION_INSTRUCTIONS
-  ← re-reads original context
-  → produces improved draft
-         │
-         ▼
-    CriticAgent (again)
-         │
-    ... (up to MAX_REVISION_CYCLES times)
-```
-
-This loop guarantees answer quality without infinite loops. Setting `MAX_REVISION_CYCLES=0` disables revision entirely.
+Full reference: [DOCUMENTATION.md §6](DOCUMENTATION.md).
 
 ---
 
 ## Adding Your Own Documents
 
-Drop any `.txt` or `.md` files into `multi_agent_rag/data/` and restart. The ingestion pipeline automatically discovers and indexes them.
+Drop `.txt` or `.md` files into `multi_agent_rag/data/` and run
+`./scripts/run.sh` (the index syncs on start), or against a running API:
 
-Or point to a different directory:
-
-```python
-ingestion.ingest_directory("/path/to/my/documents", extensions=[".txt", ".md", ".rst"])
+```bash
+curl -X POST localhost:8000/ingest/text -H 'Content-Type: application/json' \
+     -d '{"content": "Your document text...", "source": "my-notes"}'
 ```
-
----
 
 ## Adding a New Agent
 
@@ -376,7 +329,7 @@ class FactCheckerAgent(BaseAgent):
         return {"fact_check": result}
 ```
 
-Then add a node in `agents/graph.py`:
+Then wire it in `agents/graph.py`:
 
 ```python
 graph.add_node("fact_check", lambda s: node_fact_check(s, agents))
@@ -384,37 +337,22 @@ graph.add_edge("synthesis", "fact_check")
 graph.add_edge("fact_check", "critic")
 ```
 
+Because agents talk to the LLM only through `self._call`, a new agent
+automatically works on all four providers.
+
 ---
 
-## Included Knowledge Base
+## Troubleshooting (quick)
 
-| File | Topics |
+| Problem | Fix |
 |---|---|
-| `artificial_intelligence.txt` | History, ML algorithms, deep learning, LLMs, ethics |
-| `large_language_models.txt` | Transformers, RLHF, RAG, multi-agent systems, benchmarks |
-| `quantum_computing.txt` | Qubits, NISQ, Shor/Grover algorithms, hardware platforms |
-| `renewable_energy.txt` | Solar, wind, hydro, storage, economics, policy |
-| `climate_change.txt` | Science, projections, tipping points, mitigation |
-| `biotechnology.txt` | CRISPR, mRNA, genomics, synthetic biology, precision medicine |
-| `space_exploration.txt` | History, Mars missions, Artemis, commercial space, JWST |
-| `economics_finance.txt` | Markets, crypto, trade, development economics, regulations |
+| Provider errors on start | `./scripts/check.sh` tells you exactly what's wrong |
+| Ollama: "no loaded models" | `ollama pull llama3.1:8b` |
+| First run slow | one-time downloads (torch, embedding model); later runs hit the cache |
+| New data not in answers | `./scripts/update_data.sh` or `curl -X POST :8000/refresh` |
+| Changed embedding model | `python multi_agent_rag/ingest_cli.py sync --force` |
 
----
-
-## Dependencies
-
-| Package | Purpose |
-|---|---|
-| `anthropic` | Claude API (all agent LLM calls) |
-| `langgraph` | Graph-based agent orchestration, conditional routing |
-| `langchain-core` | Base primitives for langgraph |
-| `faiss-cpu` | Fast exact cosine similarity search (FAISS IndexFlatIP) |
-| `chromadb` | Persistent vector store with HNSW ANN index |
-| `sentence-transformers` | Text → vector embeddings |
-| `numpy` | Vector math (also the fallback backend) |
-| `torch` | Required by sentence-transformers |
-
----
+More in [DOCUMENTATION.md §9](DOCUMENTATION.md).
 
 ## License
 

@@ -1,3 +1,117 @@
 2026-06-26 22:48:26 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/sabbir/Documents/MultiAgent/multi_agent_rag/data'
 2026-06-26 22:50:28 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/sabbir/Documents/MultiAgent/multi_agent_rag/data'
 2026-06-26 22:52:44 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/sabbir/Documents/MultiAgent/multi_agent_rag/data'
+2026-07-10 14:32:18 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 14:32:18 [INFO    ] IndexManager              Sync: 8 files (8 new, 0 changed, 0 removed)
+2026-07-10 14:32:27 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 14:32:27 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:36:43 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:36:43 [INFO    ] IndexManager              Sync: 8 files (8 new, 0 changed, 0 removed)
+2026-07-10 15:36:53 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:36:53 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:42:58 [INFO    ] DocumentStore             Added document 'test50' → 1 chunks (id=ff76a74f4b3d0673)
+2026-07-10 15:42:58 [INFO    ] DocumentStore             Added document 'test599' → 1 chunks (id=a1c1317d12031714)
+2026-07-10 15:42:58 [INFO    ] DocumentStore             Added document 'test600' → 1 chunks (id=033fa7c8708425c5)
+2026-07-10 15:42:58 [INFO    ] DocumentStore             Added document 'test601' → 1 chunks (id=bbc8427368af5fe7)
+2026-07-10 15:42:58 [INFO    ] DocumentStore             Added document 'test1250' → 3 chunks (id=7c3198e2c5f2b517)
+2026-07-10 15:42:58 [INFO    ] DocumentStore             Added document 'test10000' → 20 chunks (id=9ed4b32d5856a332)
+2026-07-10 15:43:52 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:43:52 [INFO    ] IndexManager              Sync: 8 files (8 new, 0 changed, 0 removed)
+2026-07-10 15:44:01 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:44:01 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:44:01 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/space_exploration.txt' → 28 chunks (id=362395f5b14d7cc1)
+2026-07-10 15:44:01 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/biotechnology.txt' → 28 chunks (id=c8bef7839d5234b1)
+2026-07-10 15:44:01 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/quantum_computing.txt' → 22 chunks (id=27d301c2b113a8a6)
+2026-07-10 15:44:01 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/economics_finance.txt' → 31 chunks (id=ca77ed7cb65b90f9)
+2026-07-10 15:44:01 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/climate_change.txt' → 26 chunks (id=5b9aaf67da30ea4e)
+2026-07-10 15:44:01 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/renewable_energy.txt' → 30 chunks (id=78916c31c6116f0c)
+2026-07-10 15:44:01 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/artificial_intelligence.txt' → 25 chunks (id=4140912d2aa186e4)
+2026-07-10 15:44:01 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/large_language_models.txt' → 29 chunks (id=0b92d6ec305d641a)
+2026-07-10 15:44:01 [INFO    ] Ingestion                 Ingested 8/8 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:44:01 [INFO    ] Ingestion                 Found 0 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus'
+2026-07-10 15:44:01 [INFO    ] Ingestion                 Ingested 0/0 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:44:01 [INFO    ] IndexManager              Embedding 219 new chunks (0 cached)...
+2026-07-10 15:44:03 [WARNING ] IndexManager              Could not persist embedding cache: [Errno 2] No such file or directory: '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/index_state/embeddings.npz.tmp' -> '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/index_state/embeddings.npz'
+2026-07-10 15:44:03 [INFO    ] VectorRetriever           Using 219 precomputed embeddings (cache hit)
+2026-07-10 15:44:05 [INFO    ] VectorRetriever           [FAISS] IndexFlatIP — 219 vectors, dim=384
+2026-07-10 15:44:05 [INFO    ] VectorRetriever           Index ready — 219 vectors in FAISS backend
+2026-07-10 15:44:05 [INFO    ] IndexManager              Sync complete: {'files': 8, 'added': 8, 'changed': 0, 'removed': 0, 'documents': 8, 'chunks': 219, 'embedded_new': 219, 'embedded_cached': 0, 'backend': 'faiss', 'seconds': 12.98}
+2026-07-10 15:44:19 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:44:19 [INFO    ] IndexManager              Sync: 8 files (0 new, 0 changed, 0 removed)
+2026-07-10 15:44:30 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:44:30 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:44:30 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/space_exploration.txt' → 28 chunks (id=362395f5b14d7cc1)
+2026-07-10 15:44:30 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/biotechnology.txt' → 28 chunks (id=c8bef7839d5234b1)
+2026-07-10 15:44:30 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/quantum_computing.txt' → 22 chunks (id=27d301c2b113a8a6)
+2026-07-10 15:44:30 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/economics_finance.txt' → 31 chunks (id=ca77ed7cb65b90f9)
+2026-07-10 15:44:30 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/climate_change.txt' → 26 chunks (id=5b9aaf67da30ea4e)
+2026-07-10 15:44:30 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/renewable_energy.txt' → 30 chunks (id=78916c31c6116f0c)
+2026-07-10 15:44:30 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/artificial_intelligence.txt' → 25 chunks (id=4140912d2aa186e4)
+2026-07-10 15:44:30 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/large_language_models.txt' → 29 chunks (id=0b92d6ec305d641a)
+2026-07-10 15:44:30 [INFO    ] Ingestion                 Ingested 8/8 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:44:30 [INFO    ] Ingestion                 Found 0 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus'
+2026-07-10 15:44:30 [INFO    ] Ingestion                 Ingested 0/0 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:44:30 [INFO    ] IndexManager              Embedding 219 new chunks (0 cached)...
+2026-07-10 15:44:31 [WARNING ] IndexManager              Could not persist embedding cache: [Errno 2] No such file or directory: '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/index_state/embeddings.npz.tmp' -> '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/index_state/embeddings.npz'
+2026-07-10 15:44:31 [INFO    ] VectorRetriever           Using 219 precomputed embeddings (cache hit)
+2026-07-10 15:44:31 [INFO    ] VectorRetriever           [FAISS] IndexFlatIP — 219 vectors, dim=384
+2026-07-10 15:44:31 [INFO    ] VectorRetriever           Index ready — 219 vectors in FAISS backend
+2026-07-10 15:44:31 [INFO    ] IndexManager              Sync complete: {'files': 8, 'added': 0, 'changed': 0, 'removed': 0, 'documents': 8, 'chunks': 219, 'embedded_new': 219, 'embedded_cached': 0, 'backend': 'faiss', 'seconds': 12.11}
+2026-07-10 15:45:10 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:45:10 [INFO    ] IndexManager              Sync: 8 files (0 new, 0 changed, 0 removed)
+2026-07-10 15:45:19 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:45:19 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:45:19 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/space_exploration.txt' → 28 chunks (id=362395f5b14d7cc1)
+2026-07-10 15:45:19 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/biotechnology.txt' → 28 chunks (id=c8bef7839d5234b1)
+2026-07-10 15:45:19 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/quantum_computing.txt' → 22 chunks (id=27d301c2b113a8a6)
+2026-07-10 15:45:19 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/economics_finance.txt' → 31 chunks (id=ca77ed7cb65b90f9)
+2026-07-10 15:45:19 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/climate_change.txt' → 26 chunks (id=5b9aaf67da30ea4e)
+2026-07-10 15:45:19 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/renewable_energy.txt' → 30 chunks (id=78916c31c6116f0c)
+2026-07-10 15:45:19 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/artificial_intelligence.txt' → 25 chunks (id=4140912d2aa186e4)
+2026-07-10 15:45:19 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/large_language_models.txt' → 29 chunks (id=0b92d6ec305d641a)
+2026-07-10 15:45:19 [INFO    ] Ingestion                 Ingested 8/8 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:45:19 [INFO    ] Ingestion                 Found 0 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus'
+2026-07-10 15:45:19 [INFO    ] Ingestion                 Ingested 0/0 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:45:19 [INFO    ] IndexManager              Embedding 219 new chunks (0 cached)...
+2026-07-10 15:45:20 [INFO    ] VectorRetriever           Using 219 precomputed embeddings (cache hit)
+2026-07-10 15:45:20 [INFO    ] VectorRetriever           [FAISS] IndexFlatIP — 219 vectors, dim=384
+2026-07-10 15:45:20 [INFO    ] VectorRetriever           Index ready — 219 vectors in FAISS backend
+2026-07-10 15:45:20 [INFO    ] IndexManager              Sync complete: {'files': 8, 'added': 0, 'changed': 0, 'removed': 0, 'documents': 8, 'chunks': 219, 'embedded_new': 219, 'embedded_cached': 0, 'backend': 'faiss', 'seconds': 9.71}
+2026-07-10 15:45:35 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:45:35 [INFO    ] IndexManager              Sync: 8 files (0 new, 0 changed, 0 removed)
+2026-07-10 15:45:44 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:45:44 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:45:44 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/space_exploration.txt' → 28 chunks (id=362395f5b14d7cc1)
+2026-07-10 15:45:44 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/biotechnology.txt' → 28 chunks (id=c8bef7839d5234b1)
+2026-07-10 15:45:44 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/quantum_computing.txt' → 22 chunks (id=27d301c2b113a8a6)
+2026-07-10 15:45:44 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/economics_finance.txt' → 31 chunks (id=ca77ed7cb65b90f9)
+2026-07-10 15:45:44 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/climate_change.txt' → 26 chunks (id=5b9aaf67da30ea4e)
+2026-07-10 15:45:44 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/renewable_energy.txt' → 30 chunks (id=78916c31c6116f0c)
+2026-07-10 15:45:44 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/artificial_intelligence.txt' → 25 chunks (id=4140912d2aa186e4)
+2026-07-10 15:45:44 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/large_language_models.txt' → 29 chunks (id=0b92d6ec305d641a)
+2026-07-10 15:45:44 [INFO    ] Ingestion                 Ingested 8/8 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:45:44 [INFO    ] Ingestion                 Found 0 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus'
+2026-07-10 15:45:44 [INFO    ] Ingestion                 Ingested 0/0 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:45:44 [INFO    ] VectorRetriever           Using 219 precomputed embeddings (cache hit)
+2026-07-10 15:45:44 [INFO    ] VectorRetriever           [FAISS] IndexFlatIP — 219 vectors, dim=384
+2026-07-10 15:45:44 [INFO    ] VectorRetriever           Index ready — 219 vectors in FAISS backend
+2026-07-10 15:45:44 [INFO    ] IndexManager              Sync complete: {'files': 8, 'added': 0, 'changed': 0, 'removed': 0, 'documents': 8, 'chunks': 219, 'embedded_new': 0, 'embedded_cached': 219, 'backend': 'faiss', 'seconds': 9.68}
+2026-07-10 15:46:11 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:46:11 [INFO    ] IndexManager              Sync: 8 files (0 new, 0 changed, 0 removed)
+2026-07-10 15:46:20 [INFO    ] VectorRetriever           VectorRetriever initialised (backend=faiss, model=all-MiniLM-L6-v2)
+2026-07-10 15:46:20 [INFO    ] Ingestion                 Found 8 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data'
+2026-07-10 15:46:20 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/space_exploration.txt' → 28 chunks (id=362395f5b14d7cc1)
+2026-07-10 15:46:20 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/biotechnology.txt' → 28 chunks (id=c8bef7839d5234b1)
+2026-07-10 15:46:20 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/quantum_computing.txt' → 22 chunks (id=27d301c2b113a8a6)
+2026-07-10 15:46:20 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/economics_finance.txt' → 31 chunks (id=ca77ed7cb65b90f9)
+2026-07-10 15:46:20 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/climate_change.txt' → 26 chunks (id=5b9aaf67da30ea4e)
+2026-07-10 15:46:20 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/renewable_energy.txt' → 30 chunks (id=78916c31c6116f0c)
+2026-07-10 15:46:20 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/artificial_intelligence.txt' → 25 chunks (id=4140912d2aa186e4)
+2026-07-10 15:46:20 [INFO    ] DocumentStore             Added document '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/data/large_language_models.txt' → 29 chunks (id=0b92d6ec305d641a)
+2026-07-10 15:46:20 [INFO    ] Ingestion                 Ingested 8/8 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:46:20 [INFO    ] Ingestion                 Found 0 files to ingest from '/Users/admin/Downloads/Multi_Agent_RAG/multi_agent_rag/corpus'
+2026-07-10 15:46:20 [INFO    ] Ingestion                 Ingested 0/0 files → {'documents': 8, 'chunks': 219}
+2026-07-10 15:46:20 [INFO    ] VectorRetriever           Using 219 precomputed embeddings (cache hit)
+2026-07-10 15:46:20 [INFO    ] VectorRetriever           [FAISS] IndexFlatIP — 219 vectors, dim=384
+2026-07-10 15:46:20 [INFO    ] VectorRetriever           Index ready — 219 vectors in FAISS backend
+2026-07-10 15:46:20 [INFO    ] IndexManager              Sync complete: {'files': 8, 'added': 0, 'changed': 0, 'removed': 0, 'documents': 8, 'chunks': 219, 'embedded_new': 0, 'embedded_cached': 219, 'backend': 'faiss', 'seconds': 9.25}

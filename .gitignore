@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets & local config
+.env
+
+# Generated state (rebuilt from data/ + corpus/)
+multi_agent_rag/logs/
+multi_agent_rag/chroma_db/
+multi_agent_rag/index_state/
+multi_agent_rag/corpus/
+.update.lock
+
+# Caches
+.hf_cache/
+.DS_Store
